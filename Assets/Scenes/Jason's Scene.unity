@@ -312,3 +312,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa075b6a5a7ebeb41b441dd74faef313, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serialMap:
+  - array: 010101
+  - array: 010100
+  - array: 010001
+  mapX: 3
+  mapY: 3
+  outPath: []
+  outBreakable: []
