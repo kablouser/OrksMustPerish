@@ -8,17 +8,65 @@ public static class Pathfinding
         public Vector2Int cameFrom;
         public int fromStartCost;
         public float heuristicCost;
+        public float totalCost;
     }
 
     /// <summary>
-    /// Attempts to solve the pathfinding problem.
+    /// USE THIS! Using continuous floating grid, attempts to solve the pathfinding problem.
     /// </summary>
     /// <param name="map">Indices are defined as: map[y,x]</param>
-    /// <param name="start">Start position.</param>
-    /// <param name="end">End position.</param>
-    /// <param name="path">Found path from start to end. null if not found.</param>
-    /// <param name="breakablePath">Path to the closest breakable node. null if path is found.</param>
-    /// <returns>true if path is found, otherwise false.</returns>
+    /// <param name="mapOrigin">Map's (0,0) origin in world-space</param>
+    /// <param name="mapNodeSize">How big is each node? y value is ignored.</param>
+    /// <param name="start">Start position</param>
+    /// <param name="end">End position</param>
+    /// <param name="path">Found path from start to end. null if not found</param>
+    /// <param name="breakablePath">Path to the closest breakable node. null if path is found</param>
+    /// <returns>true if path is found, otherwise false</returns>
+    /// <returns></returns>
+    public static bool Solve(
+        Node[,] map, Vector3 mapOrigin, Vector3 mapNodeSize,
+        Vector3 start, Vector3 end,
+        out List<Vector3> path, out List<Vector3> breakablePath)
+    {
+        Vector2Int integerStart = new Vector2Int(
+            Mathf.FloorToInt((start.x - mapOrigin.x) / mapNodeSize.x),
+            Mathf.FloorToInt((start.z - mapOrigin.z) / mapNodeSize.z));
+        Vector2Int integerEnd = new Vector2Int(
+            Mathf.FloorToInt((end.x - mapOrigin.x) / mapNodeSize.x),
+            Mathf.FloorToInt((end.z - mapOrigin.z) / mapNodeSize.z));
+
+        bool returnValue = Solve(map, integerStart, integerEnd, out List<Vector2Int> integerPath, out List<Vector2Int> integerBreakablePath);
+
+        List<Vector3> selectPath;
+        if(returnValue)
+        {
+            path = selectPath = new List<Vector3>(integerPath.Count);
+            breakablePath = null;
+        }
+        else
+        {
+            path = null;
+            breakablePath = selectPath = new List<Vector3>(integerPath.Count);
+        }
+
+        for(int i = 0; i < integerPath.Count; ++i)
+            selectPath.Add(new Vector3(
+                (integerPath[i].x + 0.5f) * mapNodeSize.x + mapOrigin.x,
+                start.y,
+                (integerPath[i].y + 0.5f) * mapNodeSize.z + mapOrigin.z));
+
+        return returnValue;
+    }
+
+    /// <summary>
+    /// Using discrete integer grid, attempts to solve the pathfinding problem.
+    /// </summary>
+    /// <param name="map">Indices are defined as: map[y,x]</param>
+    /// <param name="start">Start position</param>
+    /// <param name="end">End position</param>
+    /// <param name="path">Found path from start to end. null if not found</param>
+    /// <param name="breakablePath">Path to the closest breakable node. null if path is found</param>
+    /// <returns>true if path is found, otherwise false</returns>
     public static bool Solve(
         Node[,] map, 
         Vector2Int start, Vector2Int end,
@@ -35,30 +83,27 @@ public static class Pathfinding
         InternalNode[,] internalMap = new InternalNode[map.GetLength(0), map.GetLength(1)];        
         internalMap[start.y, start.x].fromStartCost = 0;
 
-        List<Vector2Int> frontier = new List<Vector2Int>
-        {
-            start
-        };
-        HashSet<Vector2Int> visited = new HashSet<Vector2Int>();
+        List<Vector2Int> frontier = new List<Vector2Int> { start };
+        HashSet<Vector2Int> visited = new HashSet<Vector2Int>() { start };
 
         bool foundPath = false;
 
         // closest position to the end.
         Vector2Int bestPosition = start;
-        float bestHeuristic = Heuristic(0, start, end);
+        float bestHeuristic = Heuristic(start, end);
 
         while (0 < frontier.Count)
         {
             // find the node in frontier that has the lowest heuristic!
             Vector2Int current = frontier[0];
-            float currentHeuristic = internalMap[current.y, current.x].heuristicCost;
-            for (int i = 0; i < frontier.Count; ++i)
+            float currentTotalCost = internalMap[current.y, current.x].totalCost;
+            for (int i = 1; i < frontier.Count; ++i)
             {
                 Vector2Int position = frontier[i];
-                if (currentHeuristic < internalMap[position.y, position.x].heuristicCost)
+                if (internalMap[position.y, position.x].totalCost < currentTotalCost)
                 {
                     current = position;
-                    currentHeuristic = internalMap[current.y, current.x].heuristicCost;
+                    currentTotalCost = internalMap[current.y, current.x].totalCost;
                 }
             }
             frontier.Remove(current);
@@ -70,13 +115,17 @@ public static class Pathfinding
                 if (visited.Contains(neighbor) == false ||
                     neighborFromStart < internalMap[neighbor.y, neighbor.x].fromStartCost)
                 {
-                    internalMap[neighbor.y, neighbor.x].fromStartCost = neighborFromStart;
-                    internalMap[neighbor.y, neighbor.x].heuristicCost = Heuristic(neighborFromStart, neighbor, end);
                     internalMap[neighbor.y, neighbor.x].cameFrom = current;
-                    visited.Add(neighbor);
-                    frontier.Add(neighbor);
+                    internalMap[neighbor.y, neighbor.x].fromStartCost = neighborFromStart;
+                    internalMap[neighbor.y, neighbor.x].heuristicCost = Heuristic(neighbor, end);
+                    internalMap[neighbor.y, neighbor.x].totalCost =
+                        internalMap[neighbor.y, neighbor.x].fromStartCost +
+                        internalMap[neighbor.y, neighbor.x].heuristicCost;
 
-                    if(internalMap[neighbor.y, neighbor.x].heuristicCost < bestHeuristic)
+                    frontier.Add(neighbor);
+                    visited.Add(neighbor);
+
+                    if (internalMap[neighbor.y, neighbor.x].heuristicCost < bestHeuristic)
                     {
                         bestPosition = neighbor;
                         bestHeuristic = internalMap[neighbor.y, neighbor.x].heuristicCost;
@@ -167,8 +216,8 @@ public static class Pathfinding
             yield return new Vector2Int(x, y);
     }
 
-    private static float Heuristic(int distanceFromStart, Vector2Int position, Vector2Int end)
+    private static float Heuristic(Vector2Int position, Vector2Int end)
     {
-        return distanceFromStart + (position - end).magnitude;
+        return (position - end).magnitude;
     }
 }
