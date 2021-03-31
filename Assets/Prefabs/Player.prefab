@@ -320,7 +320,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddacbfa471e01f54e81eff9d7a42e27d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 6751714368290905920}
+  projectileSpawn: {fileID: 6751714368290905920}
   projectilePrefab: {fileID: 3957970432940420931, guid: 3dbf63db33592764da8ea7b1b0c26fcb, type: 3}
   weaponDamage: 20
   fireRate: 4
