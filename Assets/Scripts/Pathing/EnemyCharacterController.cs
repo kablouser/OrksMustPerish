@@ -18,15 +18,7 @@ public class EnemyCharacterController : MonoBehaviour
 
     void FixedUpdate()
     {
-        // update current path
-        pathingMap.GetPath(out List<Vector3> newPath);
-        if(currentPath != newPath)
-            currentPathIndex = 0;
-                
-        if(currentPath != null)
-        {
-            // follow current path
-
-        }
+        // update current path         
+        // follow current path
     }
 }

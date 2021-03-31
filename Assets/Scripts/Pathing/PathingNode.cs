@@ -1,20 +1,26 @@
-﻿[System.Serializable]
+﻿using UnityEngine;
+
+[System.Serializable]
 /// <summary>
 /// Pathfinding data structure.
 /// </summary>
 public struct PathingNode
-{
+{    
+    [Tooltip("To allow pathing to find nearest barricade, set the barricade's isWalkable to true (yes that's right) and its penalty to fairly high.")]
     public bool isWalkable;
-    public bool isBreakable;
-    /// <summary>
-    /// Positive value for slow-down, negative value for speed-up.
-    /// </summary>
+    [Tooltip("+ value for slow-down, - value for speed-up (don't use less than -2!). 1 equivalent to walking across 1 node. 2 equivalent to walking across 2 nodes. etc...")]
     public float penalty;
 
-    public PathingNode(bool isWalkable, bool isBreakable = false, float penalty = 0)
+    [HideInInspector]
+    public float totalCost;
+    [HideInInspector]
+    public Vector2Int cameFrom;
+
+    public PathingNode(bool isWalkable, float penalty, float totalCost, Vector2Int cameFrom)
     {
         this.isWalkable = isWalkable;
-        this.isBreakable = isBreakable;
         this.penalty = penalty;
+        this.totalCost = totalCost;
+        this.cameFrom = cameFrom;
     }
 }

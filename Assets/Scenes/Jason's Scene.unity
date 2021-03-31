@@ -447,61 +447,456 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ecc8960574aaf644a3512de9302036f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapDimensions: {x: 5, y: 3}
-  settings:
+  pathingMap:
+    map:
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 7.0710683
+      cameFrom: {x: 1, y: 1}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 6.6568546
+      cameFrom: {x: 2, y: 1}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 6.242641
+      cameFrom: {x: 3, y: 1}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 5.8284273
+      cameFrom: {x: 4, y: 1}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 5.4142137
+      cameFrom: {x: 5, y: 1}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 5
+      cameFrom: {x: 5, y: 1}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 5.4142137
+      cameFrom: {x: 5, y: 1}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 5.8284273
+      cameFrom: {x: 6, y: 1}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 6.242641
+      cameFrom: {x: 7, y: 1}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 6.6568546
+      cameFrom: {x: 8, y: 1}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 6.6568546
+      cameFrom: {x: 1, y: 2}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 5.6568546
+      cameFrom: {x: 2, y: 2}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 5.242641
+      cameFrom: {x: 3, y: 2}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 4.8284273
+      cameFrom: {x: 4, y: 2}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 4.4142137
+      cameFrom: {x: 5, y: 2}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 4
+      cameFrom: {x: 5, y: 2}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 4.4142137
+      cameFrom: {x: 5, y: 2}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 4.8284273
+      cameFrom: {x: 6, y: 2}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 5.242641
+      cameFrom: {x: 7, y: 2}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 5.6568546
+      cameFrom: {x: 8, y: 2}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 6.242641
+      cameFrom: {x: 1, y: 3}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 5.242641
+      cameFrom: {x: 2, y: 3}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 4.242641
+      cameFrom: {x: 3, y: 3}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 3.8284273
+      cameFrom: {x: 4, y: 3}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 3.4142137
+      cameFrom: {x: 5, y: 3}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 3
+      cameFrom: {x: 5, y: 3}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 3.4142137
+      cameFrom: {x: 5, y: 3}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 3.8284273
+      cameFrom: {x: 6, y: 3}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 4.242641
+      cameFrom: {x: 7, y: 3}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 5.242641
+      cameFrom: {x: 8, y: 3}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 5.8284273
+      cameFrom: {x: 1, y: 4}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 4.8284273
+      cameFrom: {x: 2, y: 4}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 3.8284273
+      cameFrom: {x: 3, y: 4}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 2.8284273
+      cameFrom: {x: 4, y: 4}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 2.4142137
+      cameFrom: {x: 5, y: 4}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 2
+      cameFrom: {x: 5, y: 4}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 2.4142137
+      cameFrom: {x: 5, y: 4}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 2.8284273
+      cameFrom: {x: 6, y: 4}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 3.8284273
+      cameFrom: {x: 7, y: 4}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 4.8284273
+      cameFrom: {x: 8, y: 4}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 5.4142137
+      cameFrom: {x: 1, y: 5}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 4.4142137
+      cameFrom: {x: 2, y: 5}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 3.4142137
+      cameFrom: {x: 3, y: 5}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 2.4142137
+      cameFrom: {x: 4, y: 5}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 1.4142137
+      cameFrom: {x: 5, y: 5}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 1
+      cameFrom: {x: 5, y: 5}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 1.4142137
+      cameFrom: {x: 5, y: 5}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 2.4142137
+      cameFrom: {x: 6, y: 5}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 3.4142137
+      cameFrom: {x: 7, y: 5}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 4.4142137
+      cameFrom: {x: 8, y: 5}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 5
+      cameFrom: {x: 1, y: 5}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 4
+      cameFrom: {x: 2, y: 5}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 3
+      cameFrom: {x: 3, y: 5}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 2
+      cameFrom: {x: 4, y: 5}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 1
+      cameFrom: {x: 5, y: 5}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 0
+      cameFrom: {x: 5, y: 5}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 1
+      cameFrom: {x: 5, y: 5}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 2
+      cameFrom: {x: 6, y: 5}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 3
+      cameFrom: {x: 7, y: 5}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 4
+      cameFrom: {x: 8, y: 5}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 5.4142137
+      cameFrom: {x: 1, y: 5}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 4.4142137
+      cameFrom: {x: 2, y: 5}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 3.4142137
+      cameFrom: {x: 3, y: 5}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 2.4142137
+      cameFrom: {x: 4, y: 5}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 1.4142137
+      cameFrom: {x: 5, y: 5}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 1
+      cameFrom: {x: 5, y: 5}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 1.4142137
+      cameFrom: {x: 5, y: 5}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 2.4142137
+      cameFrom: {x: 6, y: 5}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 3.4142137
+      cameFrom: {x: 7, y: 5}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 4.4142137
+      cameFrom: {x: 8, y: 5}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 5.8284273
+      cameFrom: {x: 1, y: 6}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 4.8284273
+      cameFrom: {x: 2, y: 6}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 3.8284273
+      cameFrom: {x: 3, y: 6}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 2.8284273
+      cameFrom: {x: 4, y: 6}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 2.4142137
+      cameFrom: {x: 5, y: 6}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 2
+      cameFrom: {x: 5, y: 6}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 2.4142137
+      cameFrom: {x: 5, y: 6}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 2.8284273
+      cameFrom: {x: 6, y: 6}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 3.8284273
+      cameFrom: {x: 7, y: 6}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 4.8284273
+      cameFrom: {x: 8, y: 6}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 6.242641
+      cameFrom: {x: 1, y: 7}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 5.242641
+      cameFrom: {x: 2, y: 7}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 4.242641
+      cameFrom: {x: 3, y: 7}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 3.8284273
+      cameFrom: {x: 4, y: 7}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 3.4142137
+      cameFrom: {x: 5, y: 7}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 3
+      cameFrom: {x: 5, y: 7}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 3.4142137
+      cameFrom: {x: 5, y: 7}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 3.8284273
+      cameFrom: {x: 6, y: 7}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 4.242641
+      cameFrom: {x: 7, y: 7}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 5.242641
+      cameFrom: {x: 8, y: 7}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 6.6568546
+      cameFrom: {x: 1, y: 8}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 5.6568546
+      cameFrom: {x: 2, y: 8}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 5.242641
+      cameFrom: {x: 3, y: 8}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 4.8284273
+      cameFrom: {x: 4, y: 8}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 4.4142137
+      cameFrom: {x: 5, y: 8}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 4
+      cameFrom: {x: 5, y: 8}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 4.4142137
+      cameFrom: {x: 5, y: 8}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 4.8284273
+      cameFrom: {x: 6, y: 8}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 5.242641
+      cameFrom: {x: 7, y: 8}
+    - isWalkable: 1
+      penalty: 0
+      totalCost: 5.6568546
+      cameFrom: {x: 8, y: 8}
+    dimensions: {x: 10, y: 10}
     mapOrigin: {x: 0, y: 0, z: 0}
-    mapNodeSize: {x: 1, y: 1, z: 1}
-    start: {x: 0.5, y: 1, z: 0.5}
-    end: {x: 2.5, y: 1, z: 2.5}
-  editorMap:
-  - array:
-    - isWalkable: 1
-      isBreakable: 0
-      penalty: 0
-    - isWalkable: 1
-      isBreakable: 0
-      penalty: 0
-    - isWalkable: 1
-      isBreakable: 0
-      penalty: 0
-    - isWalkable: 1
-      isBreakable: 0
-      penalty: 0
-    - isWalkable: 1
-      isBreakable: 0
-      penalty: 0
-  - array:
-    - isWalkable: 1
-      isBreakable: 0
-      penalty: 0
-    - isWalkable: 1
-      isBreakable: 0
-      penalty: 0
-    - isWalkable: 1
-      isBreakable: 0
-      penalty: 0
-    - isWalkable: 1
-      isBreakable: 0
-      penalty: 0
-    - isWalkable: 1
-      isBreakable: 0
-      penalty: 0
-  - array:
-    - isWalkable: 1
-      isBreakable: 0
-      penalty: 0
-    - isWalkable: 1
-      isBreakable: 0
-      penalty: 0
-    - isWalkable: 1
-      isBreakable: 0
-      penalty: 0
-    - isWalkable: 1
-      isBreakable: 0
-      penalty: 0
-    - isWalkable: 1
-      isBreakable: 0
-      penalty: 0
+    mapNodeSize: {x: 1, y: 0, z: 1}
+    sink: {x: 5, y: 0, z: 5}
+  stripOrigin: {x: 0, y: 5}
+  stripLength: 10
+  editStrip: 0
+  strip:
+  - isWalkable: 1
+    penalty: 0
+    totalCost: 5
+    cameFrom: {x: 1, y: 5}
+  - isWalkable: 1
+    penalty: 0
+    totalCost: 4
+    cameFrom: {x: 2, y: 5}
+  - isWalkable: 1
+    penalty: 0
+    totalCost: 3
+    cameFrom: {x: 3, y: 5}
+  - isWalkable: 1
+    penalty: 0
+    totalCost: 2
+    cameFrom: {x: 4, y: 5}
+  - isWalkable: 1
+    penalty: 0
+    totalCost: 1
+    cameFrom: {x: 5, y: 5}
+  - isWalkable: 1
+    penalty: 0
+    totalCost: 0
+    cameFrom: {x: 0, y: 0}
+  - isWalkable: 1
+    penalty: 0
+    totalCost: 1
+    cameFrom: {x: 5, y: 5}
+  - isWalkable: 1
+    penalty: 0
+    totalCost: 2
+    cameFrom: {x: 6, y: 5}
+  - isWalkable: 1
+    penalty: 0
+    totalCost: 3
+    cameFrom: {x: 7, y: 5}
+  - isWalkable: 1
+    penalty: 0
+    totalCost: 4
+    cameFrom: {x: 8, y: 5}
 --- !u!4 &1612677466
 Transform:
   m_ObjectHideFlags: 0
@@ -606,8 +1001,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1925418272}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 1, z: 10}
+  m_LocalPosition: {x: 5, y: 0, z: 5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2

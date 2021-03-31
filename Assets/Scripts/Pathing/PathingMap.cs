@@ -1,123 +1,174 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections.Generic;
 
-public class PathingMap : MonoBehaviour
+[System.Serializable]
+public struct PathingMap
 {
-    [System.Serializable]
-    private struct PathingNodeArray
+    public struct Neighbor
     {
-        public PathingNode[] array;
-        public PathingNodeArray(int length)
+        public Vector2Int position;
+        public float cost;
+        public Neighbor(Vector2Int position, float cost)
         {
-            array = new PathingNode[length];
+            this.position = position;
+            this.cost = cost;
         }
     }
 
-    [SerializeField]
-    private Vector2Int mapDimensions;
-    [SerializeField]
-    private PathingJob settings;
-    [SerializeField]
-    private PathingNodeArray[] editorMap;
+    [HideInInspector]
+    public PathingNode[] map;
+    public Vector2Int dimensions;
+    public Vector3 mapOrigin;
+    public Vector3 mapNodeSize;
+    public Vector3 sink;
 
-    private void Start()
+    public PathingMap(Vector2Int dimensions, Vector3 mapOrigin, Vector3 mapNodeSize, Vector3 sink)
     {
-        settings.map = new PathingNode[mapDimensions.y, mapDimensions.x];
-        for (int y = 0; y < mapDimensions.y; ++y)
-            for (int x = 0; x < mapDimensions.x; ++x)
-                settings.map[y, x] = editorMap[y].array[x];
-        settings.WaitForStart();
-        editorMap = null;
+        map = new PathingNode[dimensions.x * dimensions.y];
+        for (int i = 0; i < map.Length; ++i)
+            map[i].isWalkable = true;
+        this.dimensions = dimensions;
+        this.mapOrigin = mapOrigin;
+        this.mapNodeSize = mapNodeSize;
+        this.sink = sink;
     }
 
-    private void OnDrawGizmos()
+    public void CheckDimensions()
     {
-        if (mapDimensions[0] <= 0)
-            mapDimensions[0] = 1;
-        if (mapDimensions[1] <= 0)
-            mapDimensions[1] = 1;
-
-        if (editorMap.Length != mapDimensions[1] ||
-            editorMap.Length == 0 ||
-            editorMap[0].array.Length != mapDimensions[0])
+        if (map.Length != dimensions.x * dimensions.y)
         {
-            editorMap = new PathingNodeArray[mapDimensions[1]];
-            for (int j = 0; j < mapDimensions[1]; ++j)
-            {
-                editorMap[j] = new PathingNodeArray(mapDimensions[0]);
-                for (int i = 0; i < mapDimensions[0]; ++i)
-                    editorMap[j].array[i].isWalkable = true;
-            }
+            if (dimensions.x < 1)
+                dimensions.x = 1;
+            if (dimensions.y < 1)
+                dimensions.y = 1;
+            map = new PathingNode[dimensions.x * dimensions.y];
+            for (int i = 0; i < map.Length; ++i)
+                map[i].isWalkable = true;
         }
-
-        Gizmos.color = Color.red;
-        for (int y = 0; y < mapDimensions[1]; ++y)
-            for (int x = 0; x < mapDimensions[0]; ++x)
-                if (editorMap[y].array[x].isWalkable)
-                    Gizmos.DrawWireCube(
-                        settings.mapOrigin + new Vector3(0.5f, 0, 0.5f) +
-                        new Vector3(x * settings.mapNodeSize.x, 0.25f, y * settings.mapNodeSize.z),
-                        new Vector3(settings.mapNodeSize.x, 0.5f, settings.mapNodeSize.z));
-
-        Gizmos.color = Color.black;
-        Gizmos.DrawWireSphere(settings.start, 0.5f);
-
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(settings.end, 0.5f);
     }
 
-    private bool UpdateNodeChecked(Vector3 worldPosition, PathingNode node)
+    public int GetMapIndex(Vector2Int position)
     {
-        int x = Mathf.FloorToInt((worldPosition.x - settings.mapOrigin.x) / settings.mapNodeSize.x);
-        int y = Mathf.FloorToInt((worldPosition.z - settings.mapOrigin.z) / settings.mapNodeSize.z);
-        if (0 <= y && y < settings.map.GetLength(0) &&
-            0 <= x && x < settings.map.GetLength(1))
-        {
-            settings.map[y, x] = node;
-            return true;
-        }
-        else
-            return false;
+        return position.x + position.y * dimensions.x;
+    }
+
+    public bool InRange(Vector2Int position)
+    {
+        return 0 <= position.x && position.x < dimensions.x &&
+            0 <= position.y && position.y < dimensions.y;
+    }
+
+    public void UpdateInstructions()
+    {
+        Pathing.Solve(this, WorldToMap(sink), null);
     }
 
     /// <summary>
-    /// Attempts to update a node in the map. Fails if outside of the map boundaries.
+    /// Converts world position to map position.
     /// </summary>
-    /// <returns>true if updated, false if out of range</returns>
-    public bool UpdateNode(Vector3 worldPosition, PathingNode node)
+    /// <returns>Map position in integer form.</returns>
+    public Vector2Int WorldToMap(Vector3 worldPosition)
     {
-        if (UpdateNodeChecked(worldPosition, node))
-        {
-            settings.WaitForStart();
-            return true;
-        }
-        else
-            return false;
+        return new Vector2Int(
+            Mathf.FloorToInt((worldPosition.x - mapOrigin.x) / mapNodeSize.x),
+            Mathf.FloorToInt((worldPosition.z - mapOrigin.z) / mapNodeSize.z));
     }
 
-    public bool UpdateNodes(IEnumerable<Vector3> worldPositions, IEnumerable<PathingNode> nodes)
+    /// <summary>
+    /// Converts map position to world position.
+    /// </summary>
+    /// <returns>World position in float form.</returns>
+    public Vector3 MapToWorld(Vector2Int mapPosition)
     {
-        var positionEnumerator = worldPositions.GetEnumerator();
-        var nodeEnumerator = nodes.GetEnumerator();
-        int validUpdates = 0;
-        while (positionEnumerator.MoveNext() && nodeEnumerator.MoveNext())
-        {
-            if (UpdateNodeChecked(positionEnumerator.Current, nodeEnumerator.Current))
-                ++validUpdates;
-        }
-
-        if (0 < validUpdates)
-        {
-            settings.WaitForStart();
-            return true;
-        }
-        else
-            return false;
+        return mapOrigin + new Vector3(
+            0.5f + mapPosition.x * mapNodeSize.x,
+            mapOrigin.y,
+            0.5f + mapPosition.y * mapNodeSize.z);
     }
 
-    public bool GetPath(out List<Vector3> path)
+    public IEnumerable<Neighbor> GetNeighbors(Vector2Int position)
     {
-        return settings.GetResults(out path);
+        const float squareRoot2 = 1.41421356237f;
+        // how much diagonal neighbors affect the diagonal penalties
+        const float diagonalNeighborWeight = 0.2f;
+        // how much of self's penalty affect the diagonal penalties
+        const float diagonalSelfWeight = 1 - 2 * diagonalNeighborWeight;
+
+        float diagonalCost, straightCost;
+        {
+            int index = GetMapIndex(position);
+            diagonalCost = diagonalSelfWeight * squareRoot2 * (1.0f + map[index].penalty);
+            straightCost = 1.0f + map[index].penalty;
+        }
+
+        // assume position is in range
+        Vector2Int neighbor = new Vector2Int();
+
+        neighbor.x = position.x + 1;
+        if (neighbor.x < dimensions.x)
+        {
+            neighbor.y = position.y + 1;
+            int neighborIndex1 = GetMapIndex(new Vector2Int(neighbor.x, position.y));
+            int neighborIndex2 = GetMapIndex(new Vector2Int(position.x, neighbor.y));
+            float neighborCost1 = diagonalNeighborWeight * squareRoot2 * (1.0f + map[neighborIndex1].penalty);
+            if (neighbor.y < dimensions.y &&
+                map[neighborIndex1].isWalkable &&
+                map[neighborIndex2].isWalkable)
+                yield return new Neighbor(neighbor,
+                    diagonalCost +
+                    neighborCost1 + 
+                    diagonalNeighborWeight * squareRoot2 * (1.0f + map[neighborIndex2].penalty));
+
+            neighbor.y = position.y - 1;
+            neighborIndex2 = GetMapIndex(new Vector2Int(position.x, neighbor.y));
+            if (0 <= neighbor.y &&
+                map[neighborIndex1].isWalkable &&
+                map[neighborIndex2].isWalkable)
+                yield return new Neighbor(neighbor,
+                    diagonalCost +
+                    neighborCost1 +
+                    diagonalNeighborWeight * squareRoot2 * (1.0f + map[neighborIndex2].penalty));
+
+            neighbor.y = position.y;
+            yield return new Neighbor(neighbor, straightCost);
+        }
+
+        neighbor.x = position.x - 1;
+        if (0 <= neighbor.x)
+        {
+            neighbor.y = position.y + 1;
+            int neighborIndex1 = GetMapIndex(new Vector2Int(neighbor.x, position.y));
+            int neighborIndex2 = GetMapIndex(new Vector2Int(position.x, neighbor.y));
+            float neighborCost1 = diagonalNeighborWeight * squareRoot2 * (1.0f + map[neighborIndex1].penalty);
+            if (neighbor.y < dimensions.y &&
+                map[neighborIndex1].isWalkable &&
+                map[neighborIndex2].isWalkable)
+                yield return new Neighbor(neighbor,
+                    diagonalCost +
+                    neighborCost1 +
+                    diagonalNeighborWeight * squareRoot2 * (1.0f + map[neighborIndex2].penalty));
+
+            neighbor.y = position.y - 1;
+            neighborIndex2 = GetMapIndex(new Vector2Int(position.x, neighbor.y));
+            if (0 <= neighbor.y &&
+                map[neighborIndex1].isWalkable &&
+                map[neighborIndex2].isWalkable)
+                yield return new Neighbor(neighbor,
+                    diagonalCost +
+                    neighborCost1 +
+                    diagonalNeighborWeight * squareRoot2 * (1.0f + map[neighborIndex2].penalty));
+
+            neighbor.y = position.y;
+            yield return new Neighbor(neighbor, straightCost);
+        }
+
+        neighbor.x = position.x;
+        neighbor.y = position.y + 1;
+        if (neighbor.y < dimensions.y)
+            yield return new Neighbor(neighbor, straightCost);
+
+        neighbor.y = position.y - 1;
+        if (0 <= neighbor.y)
+            yield return new Neighbor(neighbor, straightCost);
     }
 }
