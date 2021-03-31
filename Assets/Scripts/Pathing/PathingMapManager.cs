@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PathingMapManager : MonoBehaviour
@@ -14,6 +12,23 @@ public class PathingMapManager : MonoBehaviour
     public bool editStrip = false;
     [Header("A small \"strip\" of the full map")]
     public PathingNode[] strip;
+
+    [ContextMenu("RandomTest")]
+    private void RandomTest()
+    {
+        int length = pathingMap.map.Length;
+        for (int i = 0; i < length; ++i)
+        {
+            pathingMap.map[i].isWalkable = true;
+            pathingMap.map[i].penalty = Random.Range(0, 1.1f);
+        }
+
+        System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
+        sw.Start();
+        pathingMap.UpdateInstructions();
+        sw.Stop();
+        Debug.LogFormat("time = {0}ms", sw.ElapsedMilliseconds);
+    }
 
     [ContextMenu("Start")]
     private void Start()
@@ -63,35 +78,37 @@ public class PathingMapManager : MonoBehaviour
         int i = 0;
         for (int y = 0; y < pathingMap.dimensions.y; ++y)
             for (int x = 0; x < pathingMap.dimensions.x; ++x)
+            {
                 if (pathingMap.map[pathingMap.GetMapIndex(new Vector2Int(x, y))].isWalkable)
                 {
                     Vector3 position = pathingMap.MapToWorld(new Vector2Int(x, y));
-                    position.y += 0.25f;
+                    position.y += 0.2f;
 
                     if (stripBegin <= i && i < stripEnd)
                     {
-                        Gizmos.color = Color.blue;
-                        Gizmos.DrawWireCube(
-                            position,
-                            new Vector3(
-                                pathingMap.mapNodeSize.x * 0.9f,
-                                0.5f,
-                                pathingMap.mapNodeSize.z * 0.9f));
-                        Gizmos.color = Color.red;
+                        Gizmos.color = Color.magenta;
+                        Gizmos.DrawCube(position,
+                        new Vector3(
+                            pathingMap.mapNodeSize.x * 0.9f,
+                            0.0f,
+                            pathingMap.mapNodeSize.z * 0.9f));
                     }
                     else
                     {
-                        Gizmos.DrawWireCube(
-                            position,
-                            new Vector3(
-                                pathingMap.mapNodeSize.x * 0.9f,
-                                0.5f,
-                                pathingMap.mapNodeSize.z * 0.9f));
+                        Gizmos.color = Color.red;
+                        Gizmos.DrawWireCube(position,
+                        new Vector3(
+                            pathingMap.mapNodeSize.x * 0.9f,
+                            0.0f,
+                            pathingMap.mapNodeSize.z * 0.9f));
                     }
-                                        
-                    Vector3 towards = pathingMap.MapToWorld(pathingMap.map[pathingMap.GetMapIndex(new Vector2Int(x, y))].cameFrom);                    
+
+                    Vector3 towards = pathingMap.MapToWorld(pathingMap.map[pathingMap.GetMapIndex(new Vector2Int(x, y))].cameFrom);
+                    towards.y = position.y + 0.1f;
+                    Gizmos.color = Color.black;
                     Gizmos.DrawRay(position, (towards - position) * 0.5f);
-                    ++i;
                 }
+                ++i;
+            }
     }
 }
