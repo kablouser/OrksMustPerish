@@ -9,11 +9,16 @@ public class ThirdPersonCharacterController : MonoBehaviour
     public float moveSpeed;
     public float jumpForce;
 
-    void Start()
+    private void OnEnable()
     {
         //Lock the cursor to the middle of the screen.
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    void Start()
+    {
+        
     }
 
     // Update is called once per frame
