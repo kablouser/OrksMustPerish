@@ -2,16 +2,16 @@
 /// <summary>
 /// Pathfinding data structure.
 /// </summary>
-public struct Node
+public struct PathingNode
 {
     public bool isWalkable;
     public bool isBreakable;
     /// <summary>
     /// Positive value for slow-down, negative value for speed-up.
     /// </summary>
-    public int penalty;
+    public float penalty;
 
-    public Node(bool isWalkable, bool isBreakable = false, int penalty = 0)
+    public PathingNode(bool isWalkable, bool isBreakable = false, float penalty = 0)
     {
         this.isWalkable = isWalkable;
         this.isBreakable = isBreakable;
