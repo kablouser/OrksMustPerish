@@ -26,6 +26,10 @@ public class ThirdPersonCharacterController : MonoBehaviour
     {
         Movement();
         Jump();
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            GetComponent<EntityHealth>().DamageMe(10);
+        }
     }
 
     void Movement()
