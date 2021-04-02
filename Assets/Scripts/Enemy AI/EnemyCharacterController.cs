@@ -4,18 +4,25 @@ using System.Collections.Generic;
 public class EnemyCharacterController : MonoBehaviour
 {
     public PathingMapManager mapManager;
-    public Rigidbody rb;    
+    public Animator animator;
+    public Rigidbody rb;
     public float moveSpeed;
+    [Tooltip("Degrees per second")]
+    public float rotateSpeed;
 
     [Header("How much this pushes other enemies")]
     public float pushOtherEnemy;
     [Header("How much other enemies pushes this")]
-    public float otherEnemyPush;
+    public float otherEnemyPush;    
 
     [SerializeField]
     private List<EnemyCharacterController> insideTrigger;
 
     private Vector3 targetVelocity;
+
+    private static readonly int attackTrigger = Animator.StringToHash("attack");
+    private static readonly int walkBlend = Animator.StringToHash("walkBlend");
+    public float walkAnimationMaxSpeed = 4;
 
     private void FixedUpdate()
     {
@@ -39,6 +46,10 @@ public class EnemyCharacterController : MonoBehaviour
                 awayVector.Normalize();
                 combinedVelocity += awayVector * insideTrigger[i].pushOtherEnemy * otherEnemyPush;
             }
+        if (combinedVelocity.sqrMagnitude < 1.0f)
+            animator.SetFloat(walkBlend, 0);
+        else
+            animator.SetFloat(walkBlend, 1);
         rb.velocity = new Vector3(combinedVelocity.x, rb.velocity.y, combinedVelocity.z);
     }
 
@@ -47,8 +58,8 @@ public class EnemyCharacterController : MonoBehaviour
         direction.y = 0;
         direction.Normalize();
         targetVelocity = direction;
-        if(direction != Vector3.zero)
-            rb.rotation = Quaternion.LookRotation(direction);
+        if (direction != Vector3.zero)
+            rb.rotation = Quaternion.RotateTowards(rb.rotation, Quaternion.LookRotation(direction), rotateSpeed * Time.fixedDeltaTime);
     }
 
     private void OnTriggerEnter(Collider other)
