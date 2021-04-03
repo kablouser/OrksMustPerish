@@ -56,9 +56,10 @@ GameObject:
   - component: {fileID: 1750932264464685920}
   - component: {fileID: 1750932264464685923}
   - component: {fileID: 8057397872126967738}
+  - component: {fileID: -2650656218750865790}
   m_Layer: 6
   m_Name: Little Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -128,6 +129,20 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.3
   m_Center: {x: 0, y: 0.3, z: 0}
+--- !u!114 &-2650656218750865790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1750932264464685922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1db4f05247b8b5040842a09bbecf5d76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 10
+  isPlayer: 0
 --- !u!95 &5741174183709333199
 Animator:
   serializedVersion: 3
@@ -5134,6 +5149,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: bb2e5557fa51a054488c9dfb44fd48d4, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 2524231178773743543, guid: bb2e5557fa51a054488c9dfb44fd48d4, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -5153,6 +5172,10 @@ PrefabInstance:
     - target: {fileID: 6752350683510373386, guid: bb2e5557fa51a054488c9dfb44fd48d4, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6752350683510373386, guid: bb2e5557fa51a054488c9dfb44fd48d4, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 7219527842531736072, guid: bb2e5557fa51a054488c9dfb44fd48d4, type: 3}
       propertyPath: m_Layer
