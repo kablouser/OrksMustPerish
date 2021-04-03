@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class EnemyCharacterController : MonoBehaviour
 {
     public PathingMapManager mapManager;
-    public Animator animator;
+    public EnemyAnimator animator;
     public Rigidbody rb;
     public float moveSpeed;
     [Tooltip("Degrees per second")]
@@ -13,16 +13,12 @@ public class EnemyCharacterController : MonoBehaviour
     [Header("How much this pushes other enemies")]
     public float pushOtherEnemy;
     [Header("How much other enemies pushes this")]
-    public float otherEnemyPush;    
+    public float otherEnemyPush;
 
     [SerializeField]
     private List<EnemyCharacterController> insideTrigger;
 
     private Vector3 targetVelocity;
-
-    private static readonly int attackTrigger = Animator.StringToHash("attack");
-    private static readonly int walkBlend = Animator.StringToHash("walkBlend");
-    public float walkAnimationMaxSpeed = 4;
 
     private void FixedUpdate()
     {
@@ -46,10 +42,7 @@ public class EnemyCharacterController : MonoBehaviour
                 awayVector.Normalize();
                 combinedVelocity += awayVector * insideTrigger[i].pushOtherEnemy * otherEnemyPush;
             }
-        if (combinedVelocity.sqrMagnitude < 1.0f)
-            animator.SetFloat(walkBlend, 0);
-        else
-            animator.SetFloat(walkBlend, 1);
+        animator.SetWalk(combinedVelocity.magnitude);
         rb.velocity = new Vector3(combinedVelocity.x, rb.velocity.y, combinedVelocity.z);
     }
 
