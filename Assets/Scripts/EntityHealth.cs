@@ -9,6 +9,8 @@ public class EntityHealth : MonoBehaviour
 
     public bool isPlayer;
 
+    private WaveManager waveManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +37,7 @@ public class EntityHealth : MonoBehaviour
             }
             else
             {
+                waveManager.AddEnemyDeath();
                 Destroy(gameObject);
             }
         }
@@ -62,5 +65,11 @@ public class EntityHealth : MonoBehaviour
     public int GetCurrentHealth()
     {
         return currentHealth;
+    }
+
+    //Set the wave manager
+    public void SetWaveManager(WaveManager waveManager)
+    {
+        this.waveManager = waveManager;
     }
 }

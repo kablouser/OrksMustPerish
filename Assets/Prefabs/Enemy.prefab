@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1750932264296136801}
   m_Layer: 7
   m_Name: Other Enemy Push Trigger
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -55,9 +55,10 @@ GameObject:
   - component: {fileID: 1750932264464685921}
   - component: {fileID: 1750932264464685920}
   - component: {fileID: 1750932264464685923}
+  - component: {fileID: 9033286101950955139}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -115,6 +116,20 @@ MonoBehaviour:
   otherEnemyPush: 1
   insideTrigger: []
   walkAnimationMaxSpeed: 4
+--- !u!114 &9033286101950955139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1750932264464685922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1db4f05247b8b5040842a09bbecf5d76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 10
+  isPlayer: 0
 --- !u!135 &11467958829822829
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -225,6 +240,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: bb2e5557fa51a054488c9dfb44fd48d4, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: bb2e5557fa51a054488c9dfb44fd48d4, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb2e5557fa51a054488c9dfb44fd48d4, type: 3}

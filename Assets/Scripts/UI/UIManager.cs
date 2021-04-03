@@ -9,6 +9,15 @@ public class UIManager : MonoBehaviour
     public GameObject player;
     private EntityHealth playerHealth;
 
+    public GameObject bed;
+    private EntityHealth bedHealth;
+
+    public GameObject waveManagerObject;
+    private WaveManager waveManager;
+
+    public GameObject bedHealthSliderObject;
+    private Slider bedHealthSlider;
+
     public GameObject healthSliderObject;
     private Slider healthSlider;
 
@@ -27,14 +36,22 @@ public class UIManager : MonoBehaviour
         healthSlider = healthSliderObject.GetComponent<Slider>();
         manaSlider = manaSliderObject.GetComponent<Slider>();
         playerHealth = player.GetComponent<EntityHealth>();
+        bedHealth = bed.GetComponent<EntityHealth>();
+        bedHealthSlider = bedHealthSliderObject.GetComponent<Slider>();
         waveTextNumber = waveNumberUI.GetComponent<TextMeshProUGUI>();
         buildingResourceNumber = buildingResourceNumberUI.GetComponent<TextMeshProUGUI>();
+        waveManager = waveManagerObject.GetComponent<WaveManager>();
     }
 
     void FixedUpdate()
     {
         SetMaxHealth(playerHealth.maxHealth);
         SetCurrentHealth(playerHealth.GetCurrentHealth());
+
+        SetMaxBedHealth(bedHealth.maxHealth);
+        SetCurrentBedHealth(bedHealth.GetCurrentHealth());
+
+        SetWaveNumber(waveManager.GetWaveNumber(), waveManager.GetMaxWaveNumber());
     }
 
     //Health bar setting functions.
@@ -57,6 +74,17 @@ public class UIManager : MonoBehaviour
     private void SetCurrentMana(int currentMana)
     {
         manaSlider.value = currentMana;
+    }
+
+    //Bed health bar setting functions.
+    private void SetMaxBedHealth(int maxBedHealth)
+    {
+        bedHealthSlider.maxValue = maxBedHealth;
+    }
+
+    private void SetCurrentBedHealth(int currentBedHealth)
+    {
+        bedHealthSlider.value = currentBedHealth;
     }
 
     //Wave counter function.
