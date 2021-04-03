@@ -5,12 +5,16 @@ using UnityEngine;
 public class EntityHealth : MonoBehaviour
 {
     public int maxHealth;
-    private int health;
+    private int currentHealth;
+
+    public bool isPlayer;
+
+    private WaveManager waveManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        health = maxHealth;
+        currentHealth = maxHealth;
     }
 
     // Update is called once per frame
@@ -22,28 +26,50 @@ public class EntityHealth : MonoBehaviour
     //Check to see if dead.
     void Dead()
     {
-        if (health <= 0)
+        if(currentHealth <= 0)
         {
-            Destroy(gameObject);
+            if(isPlayer)
+            {
+                //Some sort of respawn thing here please.!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                //Temp.
+                Debug.Log("Player has died");
+                currentHealth = maxHealth;
+            }
+            else
+            {
+                waveManager.AddEnemyDeath();
+                Destroy(gameObject);
+            }
         }
     }
 
     //Used to damage entity.
     public void DamageMe(int damageTaken)
     {
-        health -= damageTaken;
+        currentHealth -= damageTaken;
     }
 
     //Used to heal entity.
     public void HealMe(int amountHealed)
     {
-        if (health + amountHealed <= maxHealth)
+        if (currentHealth + amountHealed <= maxHealth)
         {
-            health = maxHealth;
+            currentHealth = maxHealth;
         }
         else
         {
-            health += amountHealed;
+            currentHealth += amountHealed;
         }
+    }
+
+    public int GetCurrentHealth()
+    {
+        return currentHealth;
+    }
+
+    //Set the wave manager
+    public void SetWaveManager(WaveManager waveManager)
+    {
+        this.waveManager = waveManager;
     }
 }
