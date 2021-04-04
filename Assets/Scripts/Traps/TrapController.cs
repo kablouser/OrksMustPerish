@@ -9,6 +9,7 @@ public class TrapController : MonoBehaviour
 {
 
     public GameObject[] traps;
+    public int[] trapCost;
 
     GameObject trapDisplay;
     GameObject display;
@@ -35,18 +36,27 @@ public class TrapController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            isPlacing = true;
-            trapDisplay = traps[0];
+            if (trapCost[0] <= GameObject.Find("LevelManager").GetComponent<BuildingResourceManager>().GetBuildingResource())
+            {
+                isPlacing = true;
+                trapDisplay = traps[0];
+            }
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            isPlacing = true;
-            trapDisplay = traps[1];
+            if (trapCost[1] <= GameObject.Find("LevelManager").GetComponent<BuildingResourceManager>().GetBuildingResource())
+            {
+                isPlacing = true;
+                trapDisplay = traps[1];
+            }
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            isPlacing = true;
-            trapDisplay = traps[2];
+            if (trapCost[2] <= GameObject.Find("LevelManager").GetComponent<BuildingResourceManager>().GetBuildingResource())
+            {
+                isPlacing = true;
+                trapDisplay = traps[2];
+            }
         }
     }
 
