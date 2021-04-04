@@ -7,148 +7,202 @@ using UnityEngine;
 /// </summary>
 public class TrapController : MonoBehaviour
 {
-    public LayerMask trapLayer;
-    public GameObject[] traps;
-    public int[] trapCost;
+    public enum TrapControlMode { none, placing, deleting };
 
-    GameObject trapDisplay;
-    GameObject display;
-    bool isPlacing = false;
-    bool isRemoving = false;
-    
-    // Start is called before the first frame update
-    void Start()
+    public BuildingResourceManager buildingResourceManager;
+    public WandWeapon wandWeapon;
+    public GenericTrap[] traps;
+
+    public LayerMask trapSlotsLayerMask;
+    public Transform mainCamera;
+    public float controlDistance = 100.0f;
+    [Range(0,1)]
+    public float refundAmount = 0.5f;
+
+    public LayerMask characterLayerMask;
+
+    private GenericTrap currentPlacingTrap;
+    private TrapSlot currentTrapSlot;
+    private TrapControlMode mode;
+
+    public int PlacingTrapIndex { get; private set; }
+    public string UIMessage { get; private set; }
+
+    private const string Fire1 = "Fire1", Fire2 = "Fire2";
+    private const string
+        PlacingTrapsMessage = "Placing Trap (cost ${0})\n<size=20>(left-click to place, right-click to cancel)</size>",
+        DeletingTrapsMessage = "Destroy Trap (refund ${0})\n<size=20>(left-click to destroy, right-click to cancel)</size>";        
+
+    private void Awake()
     {
-
+        PlacingTrapIndex = -1;
+        UIMessage = string.Empty;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         HotKeyTrap();
-        if (isPlacing)
+
+        TrapSlot lookingAt;
+        switch (mode)
         {
-            ShowTrap();
-            PlaceTrap();
-        }
-        else if (isRemoving)
-        {
-            RemoveTrap();
+            case TrapControlMode.placing:
+                lookingAt = GetLookingAtTrapSlot();
+                if(lookingAt == null || lookingAt.IsTrapPlaced())
+                {
+                    currentPlacingTrap.gameObject.SetActive(false);
+                }
+                else
+                {
+                    currentPlacingTrap.gameObject.SetActive(true);
+                    currentPlacingTrap.PlacingUpdate(buildingResourceManager, characterLayerMask);
+                    currentPlacingTrap.transform.position = lookingAt.transform.position;
+                    currentPlacingTrap.transform.rotation = lookingAt.transform.rotation;
+                    if (Input.GetButtonDown(Fire1))
+                    {
+                        if(currentPlacingTrap.TryPlace(buildingResourceManager, characterLayerMask, lookingAt))
+                            break;
+                    }
+                }
+                break;
+
+            case TrapControlMode.deleting:
+                lookingAt = GetLookingAtTrapSlot();
+                SetDeleteTrapSlot(lookingAt);
+                if (lookingAt != null && Input.GetButtonDown(Fire1))
+                    lookingAt.EndDeleteTrap(true, buildingResourceManager, refundAmount);
+                break;
+
+            default:
+                break;
         }
     }
 
     private void HotKeyTrap()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        for (int i = 0, key = (int)KeyCode.Alpha1;
+            i < traps.Length && key < (int)KeyCode.Alpha9 + 2;
+            ++i, ++key)
         {
-            //if (trapCost[0] <= GameObject.Find("LevelManager").GetComponent<BuildingResourceManager>().GetBuildingResource())
+            if (key == (int)KeyCode.Alpha9 + 1)
+                key = (int)KeyCode.Alpha0;
+            if (Input.GetKeyDown((KeyCode)key))
             {
-                isPlacing = true;
-                trapDisplay = traps[0];
-                isRemoving = false;
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            //if (trapCost[1] <= GameObject.Find("LevelManager").GetComponent<BuildingResourceManager>().GetBuildingResource())
-            {
-                isPlacing = true;
-                trapDisplay = traps[1];
-                isRemoving = false;
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-           //if (trapCost[2] <= GameObject.Find("LevelManager").GetComponent<BuildingResourceManager>().GetBuildingResource())
-            {
-                isPlacing = true;
-                trapDisplay = traps[2];
-                isRemoving = false;
+                // toggle
+                if (mode == TrapControlMode.placing && currentPlacingTrap == traps[i])
+                    SetMode(TrapControlMode.none);
+                else
+                {
+                    SetMode(TrapControlMode.placing);
+                    SetPlaceTrap(traps[i]);
+                    PlacingTrapIndex = i;
+                }
             }
         }
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            isPlacing = false;
-            isRemoving = true;
-            if (display != null)
-            {
-                display.GetComponent<TrapSlot>().DestroyTrapDisplay();
-                display = null;
-            }
+            // toggle
+            if(mode == TrapControlMode.deleting)
+                SetMode(TrapControlMode.none);
+            else
+                SetMode(TrapControlMode.deleting);
+        }
+
+        if (Input.GetButtonDown(Fire2))
+        {
+            // exit out of any mode
+            if (mode != TrapControlMode.none)
+                SetMode(TrapControlMode.none);
         }
     }
 
-    private void ShowTrap()
+    private void SetPlaceTrap(GenericTrap trap)
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
+        if (currentPlacingTrap == trap)
+            return;
 
-        if (Physics.Raycast(ray, out hit, 100f, ~trapLayer))
+        if (currentPlacingTrap != null)
+            currentPlacingTrap.gameObject.SetActive(false);
+
+        currentPlacingTrap = trap;
+
+        if (trap != null)
         {
-            if (hit.transform.gameObject.GetComponent<TrapSlot>())
-            {
-                if (!hit.transform.gameObject.GetComponent<TrapSlot>().trapPlaced)
-                {
-                    if (display != hit.transform.gameObject)
-                    {
-                        if (display != null && display.GetComponent<TrapSlot>())
-                            display.GetComponent<TrapSlot>().DestroyTrapDisplay();
-                        display = hit.transform.gameObject;
-
-                    }
-                    hit.transform.gameObject.GetComponent<TrapSlot>().DestroyTrapDisplay();
-                    hit.transform.gameObject.GetComponent<TrapSlot>().ShowTrapDisplay(trapDisplay);
-                }
-                else if (display != null)
-                {
-                    display.GetComponent<TrapSlot>().DestroyTrapDisplay();
-                    display = null;
-                }
-            }
-            else if (display != null && display.GetComponent<TrapSlot>())
-            {
-                display.GetComponent<TrapSlot>().DestroyTrapDisplay();
-            }
-        }
-        
+            trap.gameObject.SetActive(true);
+            UIMessage = string.Format(PlacingTrapsMessage, trap.cost);
+        }            
     }
 
-    private void RemoveTrap()
+    private void SetDeleteTrapSlot(TrapSlot slot)
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
+        if (currentTrapSlot == slot)
+            return;
 
-            if (Physics.Raycast(ray, out hit, 100f, ~trapLayer))
-            {
-                if (hit.transform.gameObject.GetComponent<TrapSlot>())
-                {
-                    hit.transform.gameObject.GetComponent<TrapSlot>().DestroyTrap();
-                }
-            }
-        }
-        if (Input.GetMouseButtonDown(1))
+        if (currentTrapSlot != null)
+            currentTrapSlot.EndDeleteTrap(false, buildingResourceManager, refundAmount);
+
+        currentTrapSlot = slot;
+
+        if (slot != null)
+            slot.StartDeleteTrap();
+
+        if (mode == TrapControlMode.deleting)
         {
-            isRemoving = false;
+            int refundCost = 0;
+            if (slot != null && slot.GetPlacedTrap() != null)
+                refundCost = slot.GetPlacedTrap().GetRefundCost(refundAmount);
+            UIMessage = string.Format(DeletingTrapsMessage, refundCost);
         }
     }
 
-    private void PlaceTrap()
+    private void SetMode(TrapControlMode mode)
     {
-        if (display != null && display.GetComponent<TrapSlot>())
+        if (this.mode != mode)
         {
-            if (Input.GetMouseButtonDown(0))
+            switch(this.mode)
             {
-                display.GetComponent<TrapSlot>().SpawnTrap(trapDisplay);
+                case TrapControlMode.none:
+                    wandWeapon.enabled = false;
+                    break;
+                case TrapControlMode.placing:
+                    SetPlaceTrap(null);
+                    PlacingTrapIndex = -1;
+                    break;
+                case TrapControlMode.deleting:
+                    SetDeleteTrapSlot(null);
+                    break;
+                default:
+                    break;
             }
-            if (Input.GetMouseButtonDown(1))
+            switch(mode)
             {
-                display.GetComponent<TrapSlot>().DestroyTrapDisplay();
-                isPlacing = false;
-                display = null;
+                case TrapControlMode.none:
+                    wandWeapon.enabled = true;
+                    UIMessage = string.Empty;
+                    break;
+                case TrapControlMode.deleting:
+                    UIMessage = string.Format(DeletingTrapsMessage, 0);
+                    break;
+                default:
+                    break;
             }
         }
+        this.mode = mode;
+    }
+
+    private TrapSlot GetLookingAtTrapSlot()
+    {
+        if (Physics.Raycast(
+            new Ray(mainCamera.position, mainCamera.forward),
+            out RaycastHit hit,
+            controlDistance,
+            trapSlotsLayerMask))
+        {
+            TrapSlot trapSlot = hit.collider.GetComponent<TrapSlot>();
+            if (trapSlot != null)
+                return trapSlot;
+        }
+        return null;
     }
 }

@@ -12,9 +12,8 @@ GameObject:
   - component: {fileID: 7217127129071687924}
   - component: {fileID: 4885444258019404862}
   - component: {fileID: 6056497120317252275}
-  - component: {fileID: 387593397170411662}
-  - component: {fileID: 3748048491015460695}
-  m_Layer: 8
+  - component: {fileID: 666587186969848754}
+  m_Layer: 9
   m_Name: slime_trap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6398605560301243883}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9.160994, y: 1.16, z: -18.17}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -94,24 +93,11 @@ BoxCollider:
   m_GameObject: {fileID: 6398605560301243883}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 4, y: 0.5, z: 4}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &387593397170411662
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6398605560301243883}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 4, y: 2.9724941, z: 4}
-  m_Center: {x: 0, y: 1.2362471, z: 0}
---- !u!114 &3748048491015460695
+--- !u!114 &666587186969848754
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -120,7 +106,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 6398605560301243883}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07f18feaa60d55940825c7699e94ab1c, type: 3}
+  m_Script: {fileID: 11500000, guid: d6a9d5fe87bac8f408923326fec3090b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slow: 5
+  transparentMaterials:
+  - {fileID: 2100000, guid: 7b063cf2456a76d4eae07e902c7c2fd4, type: 2}
+  opaqueMaterials:
+  - {fileID: 2100000, guid: 1a657d670db2e014dab4b135423628d8, type: 2}
+  trapRenderers:
+  - materialIndex: 0
+    renderer: {fileID: 4885444258019404862}
+  trapCollider: {fileID: 6056497120317252275}
+  cost: 2

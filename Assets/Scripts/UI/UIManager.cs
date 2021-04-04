@@ -33,9 +33,17 @@ public class UIManager : MonoBehaviour
     public GameObject levelManager;
     private BuildingResourceManager buildingResource;
 
+    private TrapController trapController;
+    public Color slotDefaultColor;
+    public Color slotSelectedColor;
+    public Image[] hotbarSlots;
+
+    public TextMeshProUGUI trapControllerMessage;
+
     // Start is called before the first frame update
     void Start()
     {
+        // Lol what is this, Ben?
         healthSlider = healthSliderObject.GetComponent<Slider>();
         manaSlider = manaSliderObject.GetComponent<Slider>();
         playerHealth = player.GetComponent<EntityHealth>();
@@ -45,6 +53,8 @@ public class UIManager : MonoBehaviour
         buildingResourceNumber = buildingResourceNumberUI.GetComponent<TextMeshProUGUI>();
         waveManager = waveManagerObject.GetComponent<WaveManager>();
         buildingResource = levelManager.GetComponent<BuildingResourceManager>();
+
+        trapController = player.GetComponent<TrapController>();
     }
 
     void FixedUpdate()
@@ -58,6 +68,19 @@ public class UIManager : MonoBehaviour
         SetWaveNumber(waveManager.GetWaveNumber(), waveManager.GetMaxWaveNumber());
 
         SetBuildingResourceNumber(buildingResource.GetBuildingResource());
+
+        int placingTrapIndex = trapController.PlacingTrapIndex;
+        for (int i = 0; i < hotbarSlots.Length; ++i)
+            hotbarSlots[i].color = placingTrapIndex == i ?
+                slotSelectedColor : slotDefaultColor;
+        string getMessage = trapController.UIMessage;
+        if (getMessage.Length == 0)
+            trapControllerMessage.enabled = false;
+        else
+        {
+            trapControllerMessage.enabled = true;
+            trapControllerMessage.SetText(getMessage);
+        }
     }
 
     //Health bar setting functions.

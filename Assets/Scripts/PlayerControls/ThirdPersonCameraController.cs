@@ -8,6 +8,7 @@ public class ThirdPersonCameraController : MonoBehaviour
     public Transform player;
 
     public float rotationSpeed;
+    public LayerMask repositionLayerMask;
 
     private float mouseX, mouseY;
     private Vector3 localPosition;
@@ -45,7 +46,7 @@ public class ThirdPersonCameraController : MonoBehaviour
         Ray ray = new Ray(target.transform.position, direction);
         RaycastHit hit;
 
-        if(Physics.Raycast(ray, out hit, cameraDistance))
+        if(Physics.Raycast(ray, out hit, cameraDistance, repositionLayerMask))
         {
             if(hit.collider != null && hit.transform.tag != "Player")
             {

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -7,62 +5,46 @@ using UnityEngine;
 /// </summary>
 public class TrapSlot : MonoBehaviour
 {
-    public bool isDisplaying = false;
-    public bool trapPlaced = false;
-    GameObject trapDisplay;
-    GameObject spawnedTrap;
-    // Start is called before the first frame update
-    void Start()
+    GenericTrap placedTrap;
+
+    public GenericTrap GetPlacedTrap()
     {
-        //Physics.OverlapBox(transform.position, transform.localScale / 2);Physics.OverlapBox(transform.position, gameObject.GetComponent<BoxCollider>().size / 3);
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 2f);
-        foreach (var other in hitColliders)
-        {
-            if (other.tag == "Prop")
-            {
-                Destroy(gameObject);
-            }
-        }
+        return placedTrap;
     }
 
-    // Update is called once per frame
-    void Update()
+    public bool IsTrapPlaced()
     {
-        
-    }
-    public void ShowTrapDisplay(GameObject trap)
-    {
-        if (!trapPlaced)
-        {
-            isDisplaying = true;
-            trapDisplay = Instantiate(trap, transform.position, transform.rotation, transform);
-        }
-    }
-    public void DestroyTrapDisplay()
-    {
-        isDisplaying = false;
-        if (trapDisplay != null)
-        {
-            Destroy(trapDisplay);
-        }
+        return placedTrap != null;
     }
 
-    public void SpawnTrap(GameObject trap)
+    /// <summary>
+    /// Doesn't check cost. Only checks if a trap exists.
+    /// </summary>
+    public GenericTrap CopyAndPlace(GenericTrap originalTrap)
     {
-        if (!trapPlaced)
+        if (IsTrapPlaced())
         {
-            spawnedTrap = Instantiate(trap, transform.position, transform.rotation, transform);
-            trapPlaced = true;
+            Debug.LogError("A trap already exists on this slot!");
+            return null;
         }
+        return (placedTrap = Instantiate(originalTrap, transform.position, Quaternion.identity, transform));
     }
 
-    public void DestroyTrap()
+    public void StartDeleteTrap()
     {
-        if (trapPlaced)
+        if(IsTrapPlaced())
+            placedTrap.StartDelete();
+    }
+
+    public void EndDeleteTrap(bool confirm,
+        BuildingResourceManager buildingResourceManager,
+        float refundPrice)
+    {
+        if (IsTrapPlaced())
         {
-            Destroy(spawnedTrap);
-            DestroyTrapDisplay();
-            trapPlaced = false;
+            placedTrap.EndDelete(confirm, buildingResourceManager, refundPrice);
+            if (confirm)
+                placedTrap = null;
         }
     }
 }

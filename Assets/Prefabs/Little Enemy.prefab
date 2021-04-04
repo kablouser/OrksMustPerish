@@ -265,7 +265,7 @@ MonoBehaviour:
   otherEnemyPush: 1
   playerDetectionMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 1024
   attackRange: 0.5
   attackDamage: 1
   chaseRange: 2
