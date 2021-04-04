@@ -3,7 +3,32 @@ guid: 8b696ced48acd41428781f9c457fd946
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert1
+    second: {fileID: 2100000, guid: 1a657d670db2e014dab4b135423628d8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lego_group_1
+    second: {fileID: 2100000, guid: f7b807f8a344c55429498ba803b9f288, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lego_group_2
+    second: {fileID: 2100000, guid: 190f86ab22029d5458d459b08be6de6d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lego_group_3
+    second: {fileID: 2100000, guid: e4a18db84b5953a4bbfcdb776f49054f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lego_group_4
+    second: {fileID: 2100000, guid: 544f7aab24cb0a04f9923e67a1e7ce39, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
