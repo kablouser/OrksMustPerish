@@ -9720,6 +9720,7 @@ GameObject:
   - component: {fileID: 5934191682279436728}
   - component: {fileID: 5934191682279436731}
   - component: {fileID: 1022251858963603270}
+  - component: {fileID: 5340152820220640782}
   m_Layer: 6
   m_Name: Large Enemy
   m_TagString: Enemy
@@ -9774,7 +9775,7 @@ MonoBehaviour:
   mapManager: {fileID: 0}
   animator: {fileID: 5338723215935395391}
   rb: {fileID: 5934191682279436728}
-  moveSpeed: 0
+  moveSpeed: 1
   rotateSpeed: 50
   pushOtherEnemy: 0.3
   otherEnemyPush: 1
