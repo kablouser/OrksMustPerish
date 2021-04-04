@@ -15,8 +15,7 @@ public class WandWeapon : MonoBehaviour
 
     public Transform cameraTransform;
 
-    [Tooltip("aka zero. The distance where the screen's crosshairs will be most accurate.")]
-    public float sightingRange;
+    public LayerMask aimLayerMask;
 
     public int weaponDamage;
     public float fireRate;
@@ -52,8 +51,21 @@ public class WandWeapon : MonoBehaviour
         projectileScript.SetRange(range);
 
         // zeroPoint = where the crosshairs is aiming at.
-        Vector3 zeroPoint = cameraTransform.position + cameraTransform.forward * sightingRange;
-        Vector3 projectileForward = (zeroPoint - spawnPosition).normalized;
+        const float aimRaycastDistance = 100.0f;
+        Vector3 cameraForward = cameraTransform.forward;
+        Vector3 projectileForward;
+        if (Physics.Raycast(new Ray(cameraTransform.position, cameraForward), out RaycastHit hit, aimRaycastDistance, aimLayerMask))
+        {
+            projectileForward = (hit.point - spawnPosition).normalized;
+            if(Vector3.Dot(projectileForward, cameraForward) < 0)
+            {
+                // the projectile is pointing backwards!
+                projectileForward = cameraForward;
+            }
+        }
+        else
+            projectileForward = cameraForward;
+
         projectileObject.GetComponent<Rigidbody>().velocity = projectileForward * projectileSpeed;
         projectileObject.transform.rotation = Quaternion.LookRotation(projectileForward);
     }
