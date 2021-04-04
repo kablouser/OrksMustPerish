@@ -11,7 +11,15 @@ public class TrapSlot : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        //Physics.OverlapBox(transform.position, transform.localScale / 2);Physics.OverlapBox(transform.position, gameObject.GetComponent<BoxCollider>().size / 3);
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 2f);
+        foreach (var other in hitColliders)
+        {
+            if (other.tag == "Prop")
+            {
+                Destroy(gameObject);
+            }
+        }
     }
 
     // Update is called once per frame
@@ -32,4 +40,14 @@ public class TrapSlot : MonoBehaviour
     {
         Instantiate(trap, transform.position, transform.rotation, transform);
     }
+
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    Debug.Log(other.name);
+    //    if (other.tag == "Prop")
+    //    {
+    //        Destroy(gameObject);
+    //    }
+    //}
+
 }

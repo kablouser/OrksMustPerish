@@ -8,7 +8,7 @@ using UnityEngine;
 public class TrapController : MonoBehaviour
 {
 
-    public GameObject legoTrap;
+    public GameObject[] traps;
 
     GameObject trapDisplay;
     GameObject display;
@@ -36,7 +36,17 @@ public class TrapController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             isPlacing = true;
-            trapDisplay = legoTrap;
+            trapDisplay = traps[0];
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            isPlacing = true;
+            trapDisplay = traps[1];
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            isPlacing = true;
+            trapDisplay = traps[2];
         }
     }
 

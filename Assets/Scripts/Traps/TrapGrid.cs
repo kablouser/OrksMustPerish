@@ -18,7 +18,10 @@ public class TrapGrid : MonoBehaviour
         {
             for(int z = 0; z < gridSize; z++)
             {
-                Instantiate(gridPiece, new Vector3((4 * x) + (transform.position.x - modSize), 0.2f, (4 * z) + (transform.position.z - modSize)), transform.rotation, transform);
+
+                GameObject trapSlot = Instantiate(gridPiece, new Vector3((4 * x) + (transform.position.x - modSize), 0.92f, (4 * z) + (transform.position.z - modSize)), transform.rotation, transform);
+                trapSlot.GetComponent<BoxCollider>().enabled = false;
+                trapSlot.GetComponent<BoxCollider>().enabled = true;
             }
         }
     }
