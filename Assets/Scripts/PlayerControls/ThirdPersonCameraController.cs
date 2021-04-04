@@ -34,10 +34,11 @@ public class ThirdPersonCameraController : MonoBehaviour
         //This is to restrict the camara y.
         mouseY = Mathf.Clamp(mouseY, -35, 60);
 
-        transform.LookAt(target);
+        // Don't do this, wastes a lot of screen space
+        // transform.LookAt(target);
 
-        target.rotation = Quaternion.Euler(mouseY, mouseX, 0);
         player.rotation = Quaternion.Euler(0, mouseX, 0);
+        target.rotation = Quaternion.Euler(mouseY, mouseX, 0);        
 
         //See if camara is in obstructed.
         Vector3 direction = (transform.position - target.transform.position).normalized;

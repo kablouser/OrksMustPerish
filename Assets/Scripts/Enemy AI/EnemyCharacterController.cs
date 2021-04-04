@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class EnemyCharacterController : MonoBehaviour
 {
     public PathingMapManager mapManager;
-    public EnemyAnimator animator;
+    public GenericAnimator animator;
     public Rigidbody rb;
     public float moveSpeed;
     [Tooltip("Degrees per second")]

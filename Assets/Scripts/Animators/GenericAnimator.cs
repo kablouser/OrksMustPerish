@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class EnemyAnimator : MonoBehaviour
+public abstract class GenericAnimator : MonoBehaviour
 {
     protected static readonly int attackTrigger = Animator.StringToHash("attack");
     protected static readonly int walkBlend = Animator.StringToHash("walkBlend");
@@ -14,4 +14,6 @@ public abstract class EnemyAnimator : MonoBehaviour
     }
 
     public abstract void SetWalk(float speed);
+
+    public abstract void SetWalkDirection(Vector2 direction);
 }

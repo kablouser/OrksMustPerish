@@ -1,10 +1,13 @@
 using UnityEngine;
+using System.Collections;
 
-public class BigEnemyAnimator : EnemyAnimator
+public class BigEnemyAnimator : GenericAnimator
 {
     public MeshRenderer tracksRenderer;
     public float scrollSpeed = 4.0f;
     public ParticleSystem exhaustFX;
+    public float fireStartTime;
+    public ParticleSystem fireFX;
         
     private Material tracksMaterial;
     private float currentScroll;
@@ -38,5 +41,26 @@ public class BigEnemyAnimator : EnemyAnimator
             if (exhaustFX.isPlaying)
                 exhaustFX.Stop();
         }
+    }
+    
+    public override void TriggerAttack()
+    {
+        base.TriggerAttack();
+        if (fireFX.isPlaying)
+            fireFX.Stop();
+
+        StopAllCoroutines();
+        StartCoroutine(PlayFireFXLater());
+    }
+
+    private IEnumerator PlayFireFXLater()
+    {
+        yield return new WaitForSeconds(fireStartTime);
+        fireFX.Play();
+    }
+
+    public override void SetWalkDirection(Vector2 direction)
+    {
+        Debug.LogError("Big enemy cannot use SetWalkDirection. Use SetWalk instead.");
     }
 }

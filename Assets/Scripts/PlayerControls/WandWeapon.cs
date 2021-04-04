@@ -4,26 +4,26 @@ using UnityEngine;
 
 public class WandWeapon : MonoBehaviour
 {
+    public GenericAnimator animator;
+
     //This can be changed to a more accurate location (e.g. the location of the wand)
     //Might need to change the direction if this is done so as to go to the center of the screen
-    public GameObject projectileSpawn;
+    public Transform projectileSpawn;
 
     //Projectile prefab must have the projectile script, a collider and a rigid body.
     public GameObject projectilePrefab;
+
+    public Transform cameraTransform;
+
+    [Tooltip("aka zero. The distance where the screen's crosshairs will be most accurate.")]
+    public float sightingRange;
 
     public int weaponDamage;
     public float fireRate;
     public float range;
     public float projectileSpeed;
 
-    private Vector3 projectileDestination;
     private float timeToFire;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -32,6 +32,7 @@ public class WandWeapon : MonoBehaviour
         {
             timeToFire = Time.time + 1 / fireRate;
             FireProjectile();
+            animator.TriggerAttack();
         }
     }
 
@@ -42,13 +43,18 @@ public class WandWeapon : MonoBehaviour
         //projectileDestination = projectileSpawn.transform.position + (projectileSpawn.transform.forward * range);
 
         //Instantiate the projectile.
-        GameObject projectileObject = Instantiate(projectilePrefab, projectileSpawn.transform.position, Quaternion.identity);
+        Vector3 spawnPosition = projectileSpawn.position;
+        GameObject projectileObject = Instantiate(projectilePrefab, spawnPosition, Quaternion.identity);
 
         //Set the damage of the projectile. Set the speed and direction too.
         Projectile projectileScript = projectileObject.GetComponent<Projectile>();
         projectileScript.SetDamage(weaponDamage);
         projectileScript.SetRange(range);
 
-        projectileObject.GetComponent<Rigidbody>().velocity = projectileSpawn.transform.forward * projectileSpeed;
+        // zeroPoint = where the crosshairs is aiming at.
+        Vector3 zeroPoint = cameraTransform.position + cameraTransform.forward * sightingRange;
+        Vector3 projectileForward = (zeroPoint - spawnPosition).normalized;
+        projectileObject.GetComponent<Rigidbody>().velocity = projectileForward * projectileSpeed;
+        projectileObject.transform.rotation = Quaternion.LookRotation(projectileForward);
     }
 }
