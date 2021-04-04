@@ -11424,6 +11424,10 @@ PrefabInstance:
       value: Large Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 5934191682279436731, guid: dc456fd1a4d6cc249b5994053befacf5, type: 3}
+      propertyPath: moveSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5934191682279436731, guid: dc456fd1a4d6cc249b5994053befacf5, type: 3}
       propertyPath: mapManager
       value: 
       objectReference: {fileID: 1612677465}
