@@ -1461,6 +1461,7 @@ MonoBehaviour:
   manaSliderObject: {fileID: 867518798}
   waveNumberUI: {fileID: 1680278641}
   buildingResourceNumberUI: {fileID: 457620800}
+  levelManager: {fileID: 803469158}
 --- !u!4 &697029006
 Transform:
   m_ObjectHideFlags: 0
@@ -1800,6 +1801,7 @@ GameObject:
   - component: {fileID: 803469159}
   - component: {fileID: 803469160}
   - component: {fileID: 803469161}
+  - component: {fileID: 803469162}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -41915,6 +41917,18 @@ MonoBehaviour:
     penalty: 0
     totalCost: -1
     cameFrom: {x: 33, y: 46}
+--- !u!114 &803469162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 803469158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10dcca0c0f6b7f745a17b103b4513a24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &867518798
 GameObject:
   m_ObjectHideFlags: 0
@@ -42363,6 +42377,7 @@ MonoBehaviour:
   maxHealth: 500
   isPlayer: 0
   isBed: 0
+  buildingResourceWorth: 0
 --- !u!54 &1017412215
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -43682,6 +43697,7 @@ MonoBehaviour:
   maxHealth: 100
   isPlayer: 0
   isBed: 1
+  buildingResourceWorth: 0
 --- !u!4 &1943709097
 Transform:
   m_ObjectHideFlags: 0
