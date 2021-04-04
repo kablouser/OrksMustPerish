@@ -1,10 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ThirdPersonCharacterController : MonoBehaviour
 {
     public Rigidbody rb;
+    public GenericAnimator animator;
 
     public float moveSpeed;
     public float jumpForce;
@@ -14,11 +13,6 @@ public class ThirdPersonCharacterController : MonoBehaviour
         //Lock the cursor to the middle of the screen.
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-    }
-
-    void Start()
-    {
-        
     }
 
     // Update is called once per frame
@@ -39,6 +33,11 @@ public class ThirdPersonCharacterController : MonoBehaviour
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
         Vector3 direction = transform.right * x + transform.forward * z;
+
+        // eliminate diagonal speedup
+        if(1 < direction.sqrMagnitude)
+            direction.Normalize();
+        animator.SetWalkDirection(new Vector2(x, z));
 
         direction *= moveSpeed;
         direction.y = rb.velocity.y;
