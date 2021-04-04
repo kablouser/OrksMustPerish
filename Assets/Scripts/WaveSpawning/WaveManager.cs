@@ -6,13 +6,12 @@ using UnityEngine;
 public struct WaveStructure
 {
     public GameObject[] enemiesToSpawn;
-    public float enemySpawnIntival;
+    public GameObject[] spawnPoint;
+    public float[] enemySpawnIntival;
 }
 
 public class WaveManager : MonoBehaviour
 {
-    public GameObject spawnPoint;
-
     public WaveStructure[] wavesInLevel;
 
     private BuildingResourceManager buildingResourceManager;
@@ -50,6 +49,7 @@ public class WaveManager : MonoBehaviour
             //If the final wave has already passed then the level is over.
             if(waveNumber == maxWaveNumber)
             {
+                Debug.Log("Level Over!");
                 levelOver = true;
             }
             else if(Input.GetKeyDown(KeyCode.T))
@@ -83,9 +83,9 @@ public class WaveManager : MonoBehaviour
         //Spawns an enemy if the alloted time has passed since the last spawn.
         if(Time.time >= timeToSpawn)
         {
-            timeToSpawn = Time.time + wavesInLevel[waveNumber].enemySpawnIntival;
+            timeToSpawn = Time.time + wavesInLevel[waveNumber].enemySpawnIntival[enemiesSpawned];
 
-            GameObject enemy = Instantiate(wavesInLevel[waveNumber].enemiesToSpawn[enemiesSpawned], spawnPoint.transform);
+            GameObject enemy = Instantiate(wavesInLevel[waveNumber].enemiesToSpawn[enemiesSpawned], wavesInLevel[waveNumber].spawnPoint[enemiesSpawned].transform);
             enemy.GetComponent<EntityHealth>().SetWaveManager(this);
             enemy.GetComponent<EntityHealth>().SetBuildingResourceManager(buildingResourceManager);
             enemy.GetComponent<EnemyCharacterController>().mapManager = pathingMapManager;
@@ -128,6 +128,11 @@ public class WaveManager : MonoBehaviour
 
     public int GetWaveNumber()
     {
+        if(waveNumber == maxWaveNumber)
+        {
+            return waveNumber;
+        }
+        
         return waveNumber + 1;
     }
 }
