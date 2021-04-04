@@ -7,7 +7,10 @@ using UnityEngine;
 /// </summary>
 public class TrapSlot : MonoBehaviour
 {
+    public bool isDisplaying = false;
+    public bool trapPlaced = false;
     GameObject trapDisplay;
+    GameObject spawnedTrap;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,25 +32,37 @@ public class TrapSlot : MonoBehaviour
     }
     public void ShowTrapDisplay(GameObject trap)
     {
-        trapDisplay = Instantiate(trap, transform.position, transform.rotation, transform);
+        if (!trapPlaced)
+        {
+            isDisplaying = true;
+            trapDisplay = Instantiate(trap, transform.position, transform.rotation, transform);
+        }
     }
     public void DestroyTrapDisplay()
     {
-        Destroy(trapDisplay);
+        isDisplaying = false;
+        if (trapDisplay != null)
+        {
+            Destroy(trapDisplay);
+        }
     }
 
     public void SpawnTrap(GameObject trap)
     {
-        Instantiate(trap, transform.position, transform.rotation, transform);
+        if (!trapPlaced)
+        {
+            spawnedTrap = Instantiate(trap, transform.position, transform.rotation, transform);
+            trapPlaced = true;
+        }
     }
 
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    Debug.Log(other.name);
-    //    if (other.tag == "Prop")
-    //    {
-    //        Destroy(gameObject);
-    //    }
-    //}
-
+    public void DestroyTrap()
+    {
+        if (trapPlaced)
+        {
+            Destroy(spawnedTrap);
+            DestroyTrapDisplay();
+            trapPlaced = false;
+        }
+    }
 }

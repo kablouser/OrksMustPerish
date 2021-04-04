@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6056497120317252275}
   - component: {fileID: 387593397170411662}
   - component: {fileID: 3748048491015460695}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: slime_trap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
