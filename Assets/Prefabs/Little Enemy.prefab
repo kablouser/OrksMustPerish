@@ -219,7 +219,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1750932264464685922}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 1, z: 0.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5352844332600017766}
@@ -259,9 +259,16 @@ MonoBehaviour:
   animator: {fileID: 8353792089596241387}
   rb: {fileID: 1750932264464685920}
   moveSpeed: 2
+  slowSpeed: 0
   rotateSpeed: 100
   pushOtherEnemy: 0.3
   otherEnemyPush: 1
+  playerDetectionMask:
+    serializedVersion: 2
+    m_Bits: 64
+  attackRange: 0.5
+  attackDamage: 1
+  chaseRange: 2
   insideTrigger: []
 --- !u!135 &8057397872126967738
 SphereCollider:
@@ -289,6 +296,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 10
+  currentHealth: 0
   isPlayer: 0
   isBed: 0
   buildingResourceWorth: 100
@@ -471,6 +479,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 5741174183709333199}
+  attackDuration: 1
+  damageTimestamp: 0.6166667
   maxAnimationSpeed: 2
 --- !u!1001 &5603505920365241485
 PrefabInstance:

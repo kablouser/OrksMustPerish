@@ -43,14 +43,15 @@ public class BigEnemyAnimator : GenericAnimator
         }
     }
     
-    public override void TriggerAttack()
+    public override void TriggerAttack(out float attackDuration, out float damageTimestamp)
     {
-        base.TriggerAttack();
+        base.TriggerAttack(out attackDuration, out damageTimestamp);
+
         if (fireFX.isPlaying)
             fireFX.Stop();
 
         StopAllCoroutines();
-        StartCoroutine(PlayFireFXLater());
+        StartCoroutine(PlayFireFXLater());        
     }
 
     private IEnumerator PlayFireFXLater()

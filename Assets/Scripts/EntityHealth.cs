@@ -5,6 +5,7 @@ using UnityEngine;
 public class EntityHealth : MonoBehaviour
 {
     public int maxHealth;
+    [SerializeField]
     private int currentHealth;
 
     public bool isPlayer;
@@ -34,7 +35,7 @@ public class EntityHealth : MonoBehaviour
         {
             if(isPlayer)
             {
-                //Some sort of respawn thing here please.!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                //TODO Some sort of respawn thing here please.!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 //Temp.
                 Debug.Log("Player has died");
                 currentHealth = maxHealth;

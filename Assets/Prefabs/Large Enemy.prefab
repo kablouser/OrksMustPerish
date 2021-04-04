@@ -9659,10 +9659,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 5338723215935395390}
+  attackDuration: 1
+  damageTimestamp: 0.4166667
   tracksRenderer: {fileID: 8788703090765123635}
   scrollSpeed: 4
   exhaustFX: {fileID: 2015002452}
-  fireStartTime: 0.7
+  fireStartTime: 0.41666666
   fireFX: {fileID: 403160480}
 --- !u!1 &5934191681506355899
 GameObject:
@@ -9776,9 +9778,16 @@ MonoBehaviour:
   animator: {fileID: 5338723215935395391}
   rb: {fileID: 5934191682279436728}
   moveSpeed: 1
+  slowSpeed: 0
   rotateSpeed: 50
   pushOtherEnemy: 0.3
   otherEnemyPush: 1
+  playerDetectionMask:
+    serializedVersion: 2
+    m_Bits: 64
+  attackRange: 3
+  attackDamage: 2
+  chaseRange: 5
   insideTrigger: []
 --- !u!135 &1022251858963603270
 SphereCollider:
@@ -9806,6 +9815,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 50
+  currentHealth: 0
   isPlayer: 0
   isBed: 0
   buildingResourceWorth: 500

@@ -32,15 +32,19 @@ public class Projectile : MonoBehaviour
          lastDistance = transform.position;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if(other.gameObject.tag != "Player" && other.gameObject.tag != "Projectile")
+        Collider other = collision.collider;
+        if (!other.gameObject.CompareTag("Player") && !other.gameObject.CompareTag("Projectile"))
         {
-            if(other.gameObject.tag == "Enemy")
+            if (other.gameObject.CompareTag("Enemy"))
             {
                 other.gameObject.GetComponentInParent<EntityHealth>().DamageMe(damage);
             }
-
+            // get close to impact point
+            const float surfaceOffset = 0.1f;
+            ContactPoint contactPoint = collision.GetContact(0);
+            transform.position = contactPoint.point + contactPoint.normal * surfaceOffset;
             Impact();
         }
     }
