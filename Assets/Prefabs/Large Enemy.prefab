@@ -606,7 +606,7 @@ ParticleSystem:
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: -1.5
+      scalar: 1.5
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -9739,7 +9739,7 @@ Transform:
   m_GameObject: {fileID: 5934191682279436730}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.5, y: 0, z: 3.9}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5592429533865574930}
   - {fileID: 5934191681506355896}
@@ -9832,15 +9832,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5b127c4869d2a98419dc098f77f0b64f, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.6
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5b127c4869d2a98419dc098f77f0b64f, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.6
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5b127c4869d2a98419dc098f77f0b64f, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.6
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5b127c4869d2a98419dc098f77f0b64f, type: 3}
       propertyPath: m_LocalPosition.x
