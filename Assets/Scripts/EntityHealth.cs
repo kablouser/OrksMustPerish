@@ -8,8 +8,12 @@ public class EntityHealth : MonoBehaviour
     private int currentHealth;
 
     public bool isPlayer;
+    public bool isBed;
+
+    public int buildingResourceWorth;
 
     private WaveManager waveManager;
+    private BuildingResourceManager buildingResourceManager;
 
     // Start is called before the first frame update
     void Start()
@@ -35,12 +39,25 @@ public class EntityHealth : MonoBehaviour
                 Debug.Log("Player has died");
                 currentHealth = maxHealth;
             }
+            if(isBed)
+            {
+                //Some game over thing here.
+                Debug.Log("GAME OVER");
+            }
             else
             {
                 waveManager.AddEnemyDeath();
+                buildingResourceManager.AddBuildingResource(buildingResourceWorth);
                 Destroy(gameObject);
             }
         }
+    }
+
+    //Enemy reached the bed.
+    public void ReachedBed()
+    {
+        waveManager.AddEnemyDeath();
+        Destroy(gameObject);
     }
 
     //Used to damage entity.
@@ -71,5 +88,11 @@ public class EntityHealth : MonoBehaviour
     public void SetWaveManager(WaveManager waveManager)
     {
         this.waveManager = waveManager;
+    }
+
+    //Set the building resource manager.
+    public void SetBuildingResourceManager(BuildingResourceManager buildingResource)
+    {
+        this.buildingResourceManager = buildingResource;
     }
 }

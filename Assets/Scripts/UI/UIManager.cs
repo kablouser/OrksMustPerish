@@ -30,6 +30,9 @@ public class UIManager : MonoBehaviour
     public GameObject buildingResourceNumberUI;
     private TextMeshProUGUI buildingResourceNumber;
 
+    public GameObject levelManager;
+    private BuildingResourceManager buildingResource;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +44,7 @@ public class UIManager : MonoBehaviour
         waveTextNumber = waveNumberUI.GetComponent<TextMeshProUGUI>();
         buildingResourceNumber = buildingResourceNumberUI.GetComponent<TextMeshProUGUI>();
         waveManager = waveManagerObject.GetComponent<WaveManager>();
+        buildingResource = levelManager.GetComponent<BuildingResourceManager>();
     }
 
     void FixedUpdate()
@@ -52,6 +56,8 @@ public class UIManager : MonoBehaviour
         SetCurrentBedHealth(bedHealth.GetCurrentHealth());
 
         SetWaveNumber(waveManager.GetWaveNumber(), waveManager.GetMaxWaveNumber());
+
+        SetBuildingResourceNumber(buildingResource.GetBuildingResource());
     }
 
     //Health bar setting functions.
@@ -96,6 +102,6 @@ public class UIManager : MonoBehaviour
     //Building resource function.
     private void SetBuildingResourceNumber(int amountOfBuildingResource)
     {
-        buildingResourceNumber.SetText("{0}", amountOfBuildingResource);
+        buildingResourceNumber.SetText("${0}", amountOfBuildingResource);
     }
 }

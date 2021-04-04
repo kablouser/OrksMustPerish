@@ -15,6 +15,8 @@ public class WaveManager : MonoBehaviour
 
     public WaveStructure[] wavesInLevel;
 
+    private BuildingResourceManager buildingResourceManager;
+
     private int maxWaveNumber;
     private int waveNumber = 0;
 
@@ -36,6 +38,7 @@ public class WaveManager : MonoBehaviour
     {
         maxWaveNumber = wavesInLevel.Length;
         pathingMapManager = GetComponent<PathingMapManager>();
+        buildingResourceManager = GetComponent<BuildingResourceManager>();
     }
 
     // Update is called once per frame
@@ -84,6 +87,7 @@ public class WaveManager : MonoBehaviour
 
             GameObject enemy = Instantiate(wavesInLevel[waveNumber].enemiesToSpawn[enemiesSpawned], spawnPoint.transform);
             enemy.GetComponent<EntityHealth>().SetWaveManager(this);
+            enemy.GetComponent<EntityHealth>().SetBuildingResourceManager(buildingResourceManager);
             enemy.GetComponent<EnemyCharacterController>().mapManager = pathingMapManager;
 
             enemiesSpawned += 1;
