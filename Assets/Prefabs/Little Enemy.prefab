@@ -144,6 +144,7 @@ MonoBehaviour:
   maxHealth: 10
   isPlayer: 0
   isBed: 0
+  buildingResourceWorth: 100
 --- !u!95 &5741174183709333199
 Animator:
   serializedVersion: 3

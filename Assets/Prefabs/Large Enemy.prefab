@@ -4983,6 +4983,7 @@ MonoBehaviour:
   maxHealth: 50
   isPlayer: 0
   isBed: 0
+  buildingResourceWorth: 500
 --- !u!1001 &5338723215462852089
 PrefabInstance:
   m_ObjectHideFlags: 0

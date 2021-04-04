@@ -10,7 +10,10 @@ public class EntityHealth : MonoBehaviour
     public bool isPlayer;
     public bool isBed;
 
+    public int buildingResourceWorth;
+
     private WaveManager waveManager;
+    private BuildingResourceManager buildingResourceManager;
 
     // Start is called before the first frame update
     void Start()
@@ -44,6 +47,7 @@ public class EntityHealth : MonoBehaviour
             else
             {
                 waveManager.AddEnemyDeath();
+                buildingResourceManager.AddBuildingResource(buildingResourceWorth);
                 Destroy(gameObject);
             }
         }
@@ -84,5 +88,11 @@ public class EntityHealth : MonoBehaviour
     public void SetWaveManager(WaveManager waveManager)
     {
         this.waveManager = waveManager;
+    }
+
+    //Set the building resource manager.
+    public void SetBuildingResourceManager(BuildingResourceManager buildingResource)
+    {
+        this.buildingResourceManager = buildingResource;
     }
 }
