@@ -39,7 +39,7 @@ public class EntityHealth : MonoBehaviour
                 Debug.Log("Player has died");
                 currentHealth = maxHealth;
             }
-            if(isBed)
+            else if(isBed)
             {
                 //Some game over thing here.
                 Debug.Log("GAME OVER");
