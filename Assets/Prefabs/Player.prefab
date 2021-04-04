@@ -207,6 +207,7 @@ GameObject:
   - component: {fileID: 6751714369453441269}
   - component: {fileID: 985692267}
   - component: {fileID: 9175287156280981751}
+  - component: {fileID: -1351502592938645674}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -290,6 +291,7 @@ MonoBehaviour:
   rb: {fileID: 6751714369453441266}
   animator: {fileID: 1291727109}
   moveSpeed: 5
+  sprintSpeed: 10
   jumpForce: 5
 --- !u!114 &985692267
 MonoBehaviour:
@@ -330,6 +332,22 @@ MonoBehaviour:
   isPlayer: 1
   isBed: 0
   buildingResourceWorth: 0
+--- !u!114 &-1351502592938645674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6751714369453441268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bace1081850c68e4188a3c65caf3ef3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  traps:
+  - {fileID: 3117961703796224604, guid: 8e6a004845ec325428f79ae341d1c5ae, type: 3}
+  - {fileID: 4297287704752887936, guid: ad84d273876e9d941b3500542b241702, type: 3}
+  - {fileID: 6398605560301243883, guid: 70c9edc12fc775143b26ee25578ec2fc, type: 3}
 --- !u!1001 &2145839926963471167
 PrefabInstance:
   m_ObjectHideFlags: 0

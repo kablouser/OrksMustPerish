@@ -6,6 +6,7 @@ public class ThirdPersonCharacterController : MonoBehaviour
     public GenericAnimator animator;
 
     public float moveSpeed;
+    public float sprintSpeed;
     public float jumpForce;
 
     private void OnEnable()
@@ -39,7 +40,14 @@ public class ThirdPersonCharacterController : MonoBehaviour
             direction.Normalize();
         animator.SetWalkDirection(new Vector2(x, z));
 
-        direction *= moveSpeed;
+        if(Input.GetKey(KeyCode.LeftShift))
+        {
+            direction *= sprintSpeed;
+        }
+        else
+        {
+            direction *= moveSpeed;
+        }
         direction.y = rb.velocity.y;
 
         rb.velocity = direction;
