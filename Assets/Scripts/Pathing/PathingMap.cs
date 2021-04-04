@@ -43,7 +43,7 @@ public struct PathingMap
                 dimensions.y = 1;
             map = new PathingNode[dimensions.x * dimensions.y];
             for (int i = 0; i < map.Length; ++i)
-                map[i].isWalkable = true;
+                map[i].isWalkable = false;
         }
     }
 
