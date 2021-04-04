@@ -8,6 +8,7 @@ public class EntityHealth : MonoBehaviour
     private int currentHealth;
 
     public bool isPlayer;
+    public bool isBed;
 
     private WaveManager waveManager;
 
@@ -35,12 +36,24 @@ public class EntityHealth : MonoBehaviour
                 Debug.Log("Player has died");
                 currentHealth = maxHealth;
             }
+            if(isBed)
+            {
+                //Some game over thing here.
+                Debug.Log("GAME OVER");
+            }
             else
             {
                 waveManager.AddEnemyDeath();
                 Destroy(gameObject);
             }
         }
+    }
+
+    //Enemy reached the bed.
+    public void ReachedBed()
+    {
+        waveManager.AddEnemyDeath();
+        Destroy(gameObject);
     }
 
     //Used to damage entity.

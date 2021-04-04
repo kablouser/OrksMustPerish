@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1750932264296136800}
   - component: {fileID: 1750932264296136801}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Other Enemy Push Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -143,6 +143,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
   isPlayer: 0
+  isBed: 0
 --- !u!95 &5741174183709333199
 Animator:
   serializedVersion: 3

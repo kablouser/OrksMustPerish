@@ -63,6 +63,15 @@ public class EnemyCharacterController : MonoBehaviour
             if (otherEnemy != null)
                 insideTrigger.Add(otherEnemy);
         }
+        else
+        {
+            var bed = other.GetComponentInParent<EntityHealth>();
+            if (bed != null && bed.isBed)
+            {
+                bed.DamageMe(10);
+                GetComponent<EntityHealth>().ReachedBed();
+            }
+        }
     }
 
     private void OnTriggerExit(Collider other)
