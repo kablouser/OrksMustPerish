@@ -102,6 +102,6 @@ public class UIManager : MonoBehaviour
     //Building resource function.
     private void SetBuildingResourceNumber(int amountOfBuildingResource)
     {
-        buildingResourceNumber.SetText("{0}", amountOfBuildingResource);
+        buildingResourceNumber.SetText("${0}", amountOfBuildingResource);
     }
 }
