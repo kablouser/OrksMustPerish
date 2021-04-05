@@ -318,7 +318,7 @@ MonoBehaviour:
   aimLayerMask:
     serializedVersion: 2
     m_Bits: 119
-  weaponDamage: 20
+  weaponDamage: 15
   fireRate: 4
   range: 10
   projectileSpeed: 25
@@ -338,8 +338,10 @@ MonoBehaviour:
   currentHealth: 0
   isPlayer: 1
   isBed: 0
+  isBarricade: 0
   buildingResourceWorth: 0
   isGameOver: 0
+  player: {fileID: 0}
   gameOverReset: {fileID: 0}
 --- !u!114 &-1351502592938645674
 MonoBehaviour:
