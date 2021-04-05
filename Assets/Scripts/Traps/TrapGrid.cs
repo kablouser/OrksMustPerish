@@ -60,4 +60,11 @@ public class TrapGrid : MonoBehaviour
             grid[i].trapGrid = this;
         }
     }
+
+    [ContextMenu("Change Pathing to Trap Grid's Layout")]
+    private void UpdatePathingMap()
+    {
+        for (int i = 0; i < grid.Length; ++i)
+            pathingMapManager.pathingMap.map[i].isWalkable = grid[i] == null;
+    }
 }
