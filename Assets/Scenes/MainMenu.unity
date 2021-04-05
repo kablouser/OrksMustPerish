@@ -1601,7 +1601,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Throw
     clip: {fileID: 8300000, guid: db5f3ee8bb092ee43851004f1b6b7ee7, type: 3}
-    volume: 0.371
+    volume: 0.15
     pitch: 1
     loop: 0
     source: {fileID: 0}
