@@ -13,6 +13,8 @@ public class EntityHealth : MonoBehaviour
 
     public int buildingResourceWorth;
 
+    public bool isGameOver = false;
+
     private WaveManager waveManager;
     private BuildingResourceManager buildingResourceManager;
 
@@ -52,19 +54,24 @@ public class EntityHealth : MonoBehaviour
     //Check to see if dead.
     void Dead()
     {
-        if(currentHealth <= 0)
+        if(currentHealth <= 0 && !isGameOver)
         {
             if(isPlayer)
             {
                 //TODO Some sort of respawn thing here please.!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 //Temp.
-                Debug.Log("Player has died");
-                currentHealth = maxHealth;
+                //Debug.Log("Player has died");
+                isGameOver = true;
+                GetComponent<ThirdPersonCharacterController>().enabled = false;
+                GetComponent<WandWeapon>().enabled = false;
             }
             else if(isBed)
             {
                 //Some game over thing here.
-                Debug.Log("GAME OVER");
+                //Debug.Log("GAME OVER");
+                isGameOver = true;
+                GetComponent<ThirdPersonCharacterController>().enabled = false;
+                GetComponent<WandWeapon>().enabled = false;
             }
             else
             {

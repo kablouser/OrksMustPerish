@@ -5,6 +5,9 @@ using System.Collections;
 
 public class UIManager : MonoBehaviour
 {
+    public GameObject mainUI;
+    public GameObject gameOverUI;
+
     public GameObject player;
     private EntityHealth playerHealth;
 
@@ -63,6 +66,8 @@ public class UIManager : MonoBehaviour
 
     void FixedUpdate()
     {
+        gameOver();
+
         SetMaxHealth(playerHealth.maxHealth);
         SetCurrentHealth(playerHealth.GetCurrentHealth());
 
@@ -158,5 +163,14 @@ public class UIManager : MonoBehaviour
 
         // campaign manager
         CampaignManager.GetCampaignManager.NextLevel();
+    }
+
+    private void gameOver()
+    {
+        if(playerHealth.isGameOver)
+        {
+            mainUI.SetActive(false);
+            gameOverUI.SetActive(true);
+        }
     }
 }
