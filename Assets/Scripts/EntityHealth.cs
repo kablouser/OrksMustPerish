@@ -16,15 +16,36 @@ public class EntityHealth : MonoBehaviour
     private WaveManager waveManager;
     private BuildingResourceManager buildingResourceManager;
 
+    private List<Color> originalMaterialsColor = new List<Color>();
+    private Renderer objectRenderer;
+    private bool takeingDamage = false;
+    private float flashTime = 0.2f;
+    private float timeToDamageOver;
+
     // Start is called before the first frame update
     void Start()
     {
         currentHealth = maxHealth;
+        objectRenderer = GetComponentInChildren<Renderer>();
+        for(int i = 0; i < objectRenderer.materials.Length; i++)
+        {
+            originalMaterialsColor.Add(objectRenderer.materials[i].color);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(takeingDamage && Time.time >= timeToDamageOver)
+        {
+            //Debug.Log("Reseting color");
+            takeingDamage = false;
+            for(int i = 0; i < objectRenderer.materials.Length; i++)
+            {
+                objectRenderer.materials[i].color = originalMaterialsColor[i];
+            }
+        }
+
         Dead();
     }
 
@@ -66,6 +87,13 @@ public class EntityHealth : MonoBehaviour
     {
         //Debug.Log("I TOOK DAMAGEEEE");
         currentHealth -= damageTaken;
+
+        takeingDamage = true;
+        for(int i = 0; i < objectRenderer.materials.Length; i++)
+        {
+            objectRenderer.materials[i].color = Color.red;
+        }
+        timeToDamageOver = Time.time + flashTime;
     }
 
     //Used to heal entity.
