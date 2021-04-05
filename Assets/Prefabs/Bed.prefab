@@ -50,6 +50,7 @@ MonoBehaviour:
   isBed: 1
   buildingResourceWorth: 0
   isGameOver: 0
+  player: {fileID: 0}
   gameOverReset: {fileID: 0}
 --- !u!65 &3535643580008166000
 BoxCollider:

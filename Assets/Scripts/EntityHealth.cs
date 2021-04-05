@@ -15,6 +15,8 @@ public class EntityHealth : MonoBehaviour
 
     public bool isGameOver = false;
 
+    public GameObject player;
+
     private WaveManager waveManager;
     private BuildingResourceManager buildingResourceManager;
 
@@ -73,8 +75,8 @@ public class EntityHealth : MonoBehaviour
                 //Some game over thing here.
                 //Debug.Log("GAME OVER");
                 isGameOver = true;
-                GetComponent<ThirdPersonCharacterController>().enabled = false;
-                GetComponent<WandWeapon>().enabled = false;
+                player.GetComponent<ThirdPersonCharacterController>().enabled = false;
+                player.GetComponent<WandWeapon>().enabled = false;
                 gameOverReset.enabled = true;
             }
             else

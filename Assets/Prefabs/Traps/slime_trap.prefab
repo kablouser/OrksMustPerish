@@ -118,7 +118,7 @@ MonoBehaviour:
   - materialIndex: 0
     renderer: {fileID: 4885444258019404862}
   trapCollider: {fileID: 6056497120317252275}
-  cost: 2
+  cost: 200
   pathingPenalty: 1
 --- !u!114 &-1857351828073845851
 MonoBehaviour:
@@ -132,4 +132,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07f18feaa60d55940825c7699e94ab1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slow: 0.7
+  slow: 0.6

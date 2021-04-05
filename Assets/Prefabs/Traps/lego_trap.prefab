@@ -1404,7 +1404,7 @@ MonoBehaviour:
   - materialIndex: 4
     renderer: {fileID: 4798139470451522292}
   trapCollider: {fileID: 3990859662617274031}
-  cost: 2
+  cost: 100
   pathingPenalty: 2
 --- !u!114 &4292660439921341264
 MonoBehaviour:

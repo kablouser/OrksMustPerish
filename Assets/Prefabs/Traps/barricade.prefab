@@ -1001,7 +1001,7 @@ MonoBehaviour:
   - materialIndex: 1
     renderer: {fileID: 7487227516873824758}
   trapCollider: {fileID: 4725852311041486680}
-  cost: 1
+  cost: 200
   pathingPenalty: 50
 --- !u!1 &3290818888251156111
 GameObject:
