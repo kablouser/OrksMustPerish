@@ -98,7 +98,7 @@ public class WaveManager : MonoBehaviour
     }
 
     //Checks if all enemies are dead.
-    private bool IsWaveDone()
+    public bool IsWaveDone()
     {
         if(enemiesDead == maxEnemiesInWave)
         {
