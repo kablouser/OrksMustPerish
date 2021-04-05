@@ -8,7 +8,7 @@ public class EnemyCharacterController : MonoBehaviour
     public GenericAnimator animator;
     public Rigidbody rb;
     public float moveSpeed;
-    public float slowSpeed;
+    public float slowSpeed = 1f;
     [Tooltip("Degrees per second")]
     public float rotateSpeed;
 
@@ -61,7 +61,7 @@ public class EnemyCharacterController : MonoBehaviour
                 Chase(target);
         }
 
-        Vector3 combinedVelocity = targetVelocity * moveSpeed;
+        Vector3 combinedVelocity = targetVelocity * (moveSpeed * slowSpeed);
         if (otherEnemyPush != 0.0f)
             for (int i = 0; i < insideTrigger.Count; ++i)
             {

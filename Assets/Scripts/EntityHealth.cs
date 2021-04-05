@@ -64,6 +64,7 @@ public class EntityHealth : MonoBehaviour
     //Used to damage entity.
     public void DamageMe(int damageTaken)
     {
+        //Debug.Log("I TOOK DAMAGEEEE");
         currentHealth -= damageTaken;
     }
 

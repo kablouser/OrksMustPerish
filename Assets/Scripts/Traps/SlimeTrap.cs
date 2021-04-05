@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SlimeTrap : MonoBehaviour
 {
-    public float slow = 5f;
+    public float slow = 0.2f;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,17 +19,17 @@ public class SlimeTrap : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.GetComponent<EnemyCharacterController>())
+        if(other.GetComponent<EnemyCharacterController>())
         {
-            //SET SLOW SPEED
+            other.GetComponent<EnemyCharacterController>().slowSpeed = slow;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.GetComponent<EnemyCharacterController>())
+        if(other.GetComponent<EnemyCharacterController>())
         {
-            //SET SLOW SPEED TO 0
+            other.GetComponent<EnemyCharacterController>().slowSpeed = 1f;
         }
     }
 }

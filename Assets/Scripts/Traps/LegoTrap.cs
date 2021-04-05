@@ -5,55 +5,44 @@ using UnityEngine;
 public class LegoTrap : MonoBehaviour
 {
     public int damage = 1;
-    public float damageTime = 0.5f;
+    public float damageTime = 1;
 
-    // Start is called before the first frame update
-    void Start()
+    private float timeToDamage;
+
+    private LayerMask mask;
+
+    private void Start()
     {
-
+        mask = LayerMask.GetMask("Character");
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.GetComponent<EntityHealth>() && !other.GetComponent<LegoDamageComponent>())
+        if(Time.time >= timeToDamage)
         {
-            if (other.GetComponent<EntityHealth>().isPlayer)
-            {
-                other.gameObject.AddComponent(typeof(LegoDamageComponent));
-                other.GetComponent<LegoDamageComponent>().damage = damage;
-                other.GetComponent<LegoDamageComponent>().damageTimer = damageTime;
-            }
+            //Debug.Log("DOING DMAGE");
+            timeToDamage = Time.time + damageTime;
+            DoDamage();
         }
     }
 
-    private void OnTriggerStay(Collider other)
+    private void DoDamage()
     {
-        if (other.GetComponent<EntityHealth>() && !other.GetComponent<LegoDamageComponent>())
+        Collider[] hitColliders = Physics.OverlapBox(gameObject.transform.position, transform.localScale * 2, Quaternion.identity, mask);
+        int i = 0;
+
+        while(i < hitColliders.Length)
         {
-            if (other.GetComponent<EntityHealth>().isPlayer)
-            {
-                other.gameObject.AddComponent(typeof(LegoDamageComponent));
-                other.GetComponent<LegoDamageComponent>().damage = damage;
-                other.GetComponent<LegoDamageComponent>().damageTimer = damageTime;
-            }
+            Debug.Log("Hit : " + hitColliders[i].name + i);
+            hitColliders[i].GetComponentInParent<EntityHealth>().DamageMe(damage);
+            i++;
         }
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.GetComponent<EntityHealth>())
-        {
-            if (other.GetComponent<EntityHealth>().isPlayer)
-            {
-                Destroy(other.GetComponent<LegoDamageComponent>());
-                //other.GetComponent<EntityHealth>().DamageMe(damage);
-            }
-        }
-    }
+    //void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.blue;
+    //    Gizmos.DrawWireCube(transform.position, transform.localScale * 4);
+    //}
 }
