@@ -118,3 +118,4 @@ MonoBehaviour:
     renderer: {fileID: 4885444258019404862}
   trapCollider: {fileID: 6056497120317252275}
   cost: 2
+  pathingPenalty: 1

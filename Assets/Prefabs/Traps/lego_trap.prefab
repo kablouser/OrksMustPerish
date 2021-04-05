@@ -1404,6 +1404,7 @@ MonoBehaviour:
     renderer: {fileID: 4798139470451522292}
   trapCollider: {fileID: 3990859662617274031}
   cost: 2
+  pathingPenalty: 2
 --- !u!1 &4405650144442248391
 GameObject:
   m_ObjectHideFlags: 0

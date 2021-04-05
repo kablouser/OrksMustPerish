@@ -5,7 +5,17 @@ using UnityEngine;
 /// </summary>
 public class TrapSlot : MonoBehaviour
 {
+    public TrapGrid trapGrid;
     GenericTrap placedTrap;
+
+    private void Start()
+    {
+        if (trapGrid == null)
+        {
+            trapGrid = FindObjectOfType<TrapGrid>();
+            Debug.LogWarning("Trap slot doesn't have reference to trap grid. Finding now ...");
+        }
+    }
 
     public GenericTrap GetPlacedTrap()
     {
@@ -27,7 +37,9 @@ public class TrapSlot : MonoBehaviour
             Debug.LogError("A trap already exists on this slot!");
             return null;
         }
-        return (placedTrap = Instantiate(originalTrap, transform.position, Quaternion.identity, transform));
+        placedTrap = Instantiate(originalTrap, transform.position, Quaternion.identity, transform);
+        trapGrid.UpdateGrid(this);
+        return placedTrap;
     }
 
     public void StartDeleteTrap()
@@ -44,7 +56,10 @@ public class TrapSlot : MonoBehaviour
         {
             placedTrap.EndDelete(confirm, buildingResourceManager, refundPrice);
             if (confirm)
+            {
                 placedTrap = null;
+                trapGrid.UpdateGrid(this);
+            }
         }
     }
 }
