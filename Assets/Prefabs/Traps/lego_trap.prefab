@@ -1296,6 +1296,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3524305074165858874}
   - component: {fileID: 8730176819210318594}
+  - component: {fileID: 4292660439921341264}
   m_Layer: 9
   m_Name: lego_trap
   m_TagString: Untagged
@@ -1405,6 +1406,20 @@ MonoBehaviour:
   trapCollider: {fileID: 3990859662617274031}
   cost: 2
   pathingPenalty: 2
+--- !u!114 &4292660439921341264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4297287704752887936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2e562009d73dec4495e273062ecf9a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  damageTime: 1
 --- !u!1 &4405650144442248391
 GameObject:
   m_ObjectHideFlags: 0
