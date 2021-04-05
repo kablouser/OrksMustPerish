@@ -58,6 +58,7 @@ public class ThirdPersonCharacterController : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space) && IsGrounded())
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            FindObjectOfType<AudioManager>().Play("Jump");
         }
     }
 

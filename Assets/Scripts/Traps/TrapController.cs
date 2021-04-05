@@ -60,8 +60,11 @@ public class TrapController : MonoBehaviour
                     currentPlacingTrap.transform.rotation = lookingAt.transform.rotation;
                     if (Input.GetButtonDown(Fire1))
                     {
-                        if(currentPlacingTrap.TryPlace(buildingResourceManager, characterLayerMask, lookingAt))
+                        if (currentPlacingTrap.TryPlace(buildingResourceManager, characterLayerMask, lookingAt))
+                        {
+                            FindObjectOfType<AudioManager>().Play("PlaceTrap");
                             break;
+                        }
                     }
                 }
                 break;
@@ -70,7 +73,10 @@ public class TrapController : MonoBehaviour
                 lookingAt = GetLookingAtTrapSlot();
                 SetDeleteTrapSlot(lookingAt);
                 if (lookingAt != null && Input.GetButtonDown(Fire1))
+                {
+                    FindObjectOfType<AudioManager>().Play("TrapDestroy");
                     lookingAt.EndDeleteTrap(true, buildingResourceManager, refundAmount);
+                }
                 break;
 
             default:

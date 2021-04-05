@@ -112,6 +112,7 @@ public class EntityHealth : MonoBehaviour
             objectRenderer.materials[i].color = Color.red;
         }
         timeToDamageOver = Time.time + flashTime;
+        FindObjectOfType<AudioManager>().Play("Hit");
     }
 
     //Used to heal entity.

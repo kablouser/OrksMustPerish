@@ -32,6 +32,7 @@ public class WandWeapon : MonoBehaviour
             timeToFire = Time.time + 1 / fireRate;
             FireProjectile();
             animator.TriggerAttack(out _, out _);
+            FindObjectOfType<AudioManager>().Play("Throw");
         }
     }
 
