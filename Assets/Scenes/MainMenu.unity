@@ -1821,9 +1821,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1610037189}
-        m_TargetAssemblyTypeName: CampaignManager, Assembly-CSharp
-        m_MethodName: NextLevel
+      - m_Target: {fileID: 1920592997}
+        m_TargetAssemblyTypeName: ButtonManager, Assembly-CSharp
+        m_MethodName: Play
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -10,4 +10,8 @@ public class ButtonManager : MonoBehaviour
     {
         Application.Quit();
     }
+    public void Play()
+    {
+        CampaignManager.GetCampaignManager.NextLevel();
+    }
 }
