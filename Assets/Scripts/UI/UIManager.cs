@@ -45,6 +45,8 @@ public class UIManager : MonoBehaviour
     public float levelOverWaitTime = 4.0f;
     public TextMeshProUGUI levelOverMessage;
 
+    public TextMeshProUGUI nextWaveMessage;
+
     private const string levelOverString = "Level victory! Continuing in {0}s...";
 
     // Start is called before the first frame update
@@ -97,6 +99,8 @@ public class UIManager : MonoBehaviour
             StopAllCoroutines();
             StartCoroutine(NextLevelRoutine());
         }
+                
+        nextWaveMessage.enabled = waveManager.IsWaveDone() && waveManager.LevelOver == false;
     }
 
     //Health bar setting functions.
