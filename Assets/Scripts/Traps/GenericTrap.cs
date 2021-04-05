@@ -60,7 +60,9 @@ public class GenericTrap : MonoBehaviour
             if (confirm)
             {
                 Destroy(gameObject);
-                buildResourceManager.AddBuildingResource(GetRefundCost(refundAmount));
+
+                if (0 < refundAmount)
+                    buildResourceManager.AddBuildingResource(GetRefundCost(refundAmount));
             }
             else
                 SetInternalState(TrapState.placed, TrapColor.normal);

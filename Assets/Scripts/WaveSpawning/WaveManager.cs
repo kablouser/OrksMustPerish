@@ -29,6 +29,7 @@ public class WaveManager : MonoBehaviour
     private float timeToSpawn;
 
     private PathingMapManager pathingMapManager;
+    private TrapGrid trapGrid;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +38,7 @@ public class WaveManager : MonoBehaviour
         maxWaveNumber = wavesInLevel.Length;
         pathingMapManager = GetComponent<PathingMapManager>();
         buildingResourceManager = GetComponent<BuildingResourceManager>();
+        trapGrid = GetComponent<TrapGrid>();
     }
 
     // Update is called once per frame
@@ -87,6 +89,7 @@ public class WaveManager : MonoBehaviour
             enemy.GetComponent<EntityHealth>().SetWaveManager(this);
             enemy.GetComponent<EntityHealth>().SetBuildingResourceManager(buildingResourceManager);
             enemy.GetComponent<EnemyCharacterController>().mapManager = pathingMapManager;
+            enemy.GetComponent<EnemyCharacterController>().trapGrid = trapGrid;
 
             enemiesSpawned += 1;
 

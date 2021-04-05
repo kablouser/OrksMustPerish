@@ -13,23 +13,6 @@ public class PathingMapManager : MonoBehaviour
     [Header("A small \"strip\" of the full map")]
     public PathingNode[] strip;
 
-    [ContextMenu("RandomTest")]
-    private void RandomTest()
-    {
-        int length = pathingMap.map.Length;
-        for (int i = 0; i < length; ++i)
-        {
-            pathingMap.map[i].isWalkable = true;
-            pathingMap.map[i].penalty = Random.Range(0, 1.1f);
-        }
-
-        System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
-        sw.Start();
-        pathingMap.UpdateInstructions();
-        sw.Stop();
-        Debug.LogFormat("time = {0}ms", sw.ElapsedMilliseconds);
-    }
-
     [ContextMenu("Start")]
     private void Start()
     {
