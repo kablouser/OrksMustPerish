@@ -18,6 +18,8 @@ public class EntityHealth : MonoBehaviour
     private WaveManager waveManager;
     private BuildingResourceManager buildingResourceManager;
 
+    public GameOverReset gameOverReset;
+
     private List<Color> originalMaterialsColor = new List<Color>();
     private Renderer objectRenderer;
     private bool takeingDamage = false;
@@ -64,6 +66,7 @@ public class EntityHealth : MonoBehaviour
                 isGameOver = true;
                 GetComponent<ThirdPersonCharacterController>().enabled = false;
                 GetComponent<WandWeapon>().enabled = false;
+                gameOverReset.enabled = true;
             }
             else if(isBed)
             {
@@ -72,6 +75,7 @@ public class EntityHealth : MonoBehaviour
                 isGameOver = true;
                 GetComponent<ThirdPersonCharacterController>().enabled = false;
                 GetComponent<WandWeapon>().enabled = false;
+                gameOverReset.enabled = true;
             }
             else
             {

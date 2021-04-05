@@ -34,7 +34,7 @@ public class LegoTrap : MonoBehaviour
 
         while(i < hitColliders.Length)
         {
-            Debug.Log("Hit : " + hitColliders[i].name + i);
+            //Debug.Log("Hit : " + hitColliders[i].name + i);
             hitColliders[i].GetComponentInParent<EntityHealth>().DamageMe(damage);
             i++;
         }

@@ -1468,7 +1468,6 @@ GameObject:
   - component: {fileID: 390480001668804458}
   - component: {fileID: 2066984414168034480}
   - component: {fileID: 3990859662617274031}
-  - component: {fileID: 3990859662617274030}
   - component: {fileID: 8062151646423503522}
   m_Layer: 9
   m_Name: pCube1
@@ -1551,22 +1550,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 0
   serializedVersion: 2
-  m_Size: {x: 4, y: 0.5, z: 4}
-  m_Center: {x: 0, y: -0.000000014901161, z: 0}
---- !u!114 &3990859662617274030
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4519463554417672322}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2e562009d73dec4495e273062ecf9a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 1
-  damageTime: 0.5
+  m_Size: {x: 4, y: 0.13279662, z: 4}
+  m_Center: {x: 0, y: -0.18360169, z: 0}
 --- !u!65 &8062151646423503522
 BoxCollider:
   m_ObjectHideFlags: 0

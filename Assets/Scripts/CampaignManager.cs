@@ -30,4 +30,9 @@ public class CampaignManager : MonoBehaviour
             SceneManager.LoadScene(allLevels[currentLevel]);
         
     }
+
+    public void RestartLevel()
+    {
+        SceneManager.LoadScene(allLevels[currentLevel], LoadSceneMode.Single);
+    }
 }
