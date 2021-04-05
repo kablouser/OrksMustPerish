@@ -6203,6 +6203,117 @@ MonoBehaviour:
     - 0
     - 1
     - 0
+  - enemiesToSpawn:
+    - {fileID: 5934191682279436730, guid: dc456fd1a4d6cc249b5994053befacf5, type: 3}
+    - {fileID: 5934191682279436730, guid: dc456fd1a4d6cc249b5994053befacf5, type: 3}
+    - {fileID: 8305191314412038720, guid: 3003e6c33f93e4541a8bc6b8f9f53933, type: 3}
+    - {fileID: 8305191314412038720, guid: 3003e6c33f93e4541a8bc6b8f9f53933, type: 3}
+    - {fileID: 8305191314412038720, guid: 3003e6c33f93e4541a8bc6b8f9f53933, type: 3}
+    - {fileID: 8305191314412038720, guid: 3003e6c33f93e4541a8bc6b8f9f53933, type: 3}
+    - {fileID: 8305191314412038720, guid: 3003e6c33f93e4541a8bc6b8f9f53933, type: 3}
+    - {fileID: 8305191314412038720, guid: 3003e6c33f93e4541a8bc6b8f9f53933, type: 3}
+    - {fileID: 8305191314412038720, guid: 3003e6c33f93e4541a8bc6b8f9f53933, type: 3}
+    - {fileID: 8305191314412038720, guid: 3003e6c33f93e4541a8bc6b8f9f53933, type: 3}
+    - {fileID: 8305191314412038720, guid: 3003e6c33f93e4541a8bc6b8f9f53933, type: 3}
+    - {fileID: 8305191314412038720, guid: 3003e6c33f93e4541a8bc6b8f9f53933, type: 3}
+    - {fileID: 1750932264464685922, guid: a3b38d62cfe99e84789e0b8761646e7b, type: 3}
+    - {fileID: 1750932264464685922, guid: a3b38d62cfe99e84789e0b8761646e7b, type: 3}
+    - {fileID: 1750932264464685922, guid: a3b38d62cfe99e84789e0b8761646e7b, type: 3}
+    - {fileID: 1750932264464685922, guid: a3b38d62cfe99e84789e0b8761646e7b, type: 3}
+    - {fileID: 1750932264464685922, guid: a3b38d62cfe99e84789e0b8761646e7b, type: 3}
+    - {fileID: 1750932264464685922, guid: a3b38d62cfe99e84789e0b8761646e7b, type: 3}
+    - {fileID: 1750932264464685922, guid: a3b38d62cfe99e84789e0b8761646e7b, type: 3}
+    - {fileID: 1750932264464685922, guid: a3b38d62cfe99e84789e0b8761646e7b, type: 3}
+    - {fileID: 1750932264464685922, guid: a3b38d62cfe99e84789e0b8761646e7b, type: 3}
+    - {fileID: 1750932264464685922, guid: a3b38d62cfe99e84789e0b8761646e7b, type: 3}
+    - {fileID: 1750932264464685922, guid: a3b38d62cfe99e84789e0b8761646e7b, type: 3}
+    - {fileID: 1750932264464685922, guid: a3b38d62cfe99e84789e0b8761646e7b, type: 3}
+    - {fileID: 8305191314412038720, guid: 3003e6c33f93e4541a8bc6b8f9f53933, type: 3}
+    - {fileID: 8305191314412038720, guid: 3003e6c33f93e4541a8bc6b8f9f53933, type: 3}
+    - {fileID: 1750932264464685922, guid: a3b38d62cfe99e84789e0b8761646e7b, type: 3}
+    - {fileID: 1750932264464685922, guid: a3b38d62cfe99e84789e0b8761646e7b, type: 3}
+    - {fileID: 1750932264464685922, guid: a3b38d62cfe99e84789e0b8761646e7b, type: 3}
+    - {fileID: 1750932264464685922, guid: a3b38d62cfe99e84789e0b8761646e7b, type: 3}
+    - {fileID: 1750932264464685922, guid: a3b38d62cfe99e84789e0b8761646e7b, type: 3}
+    - {fileID: 8305191314412038720, guid: 3003e6c33f93e4541a8bc6b8f9f53933, type: 3}
+    - {fileID: 8305191314412038720, guid: 3003e6c33f93e4541a8bc6b8f9f53933, type: 3}
+    - {fileID: 8305191314412038720, guid: 3003e6c33f93e4541a8bc6b8f9f53933, type: 3}
+    - {fileID: 8305191314412038720, guid: 3003e6c33f93e4541a8bc6b8f9f53933, type: 3}
+    - {fileID: 8305191314412038720, guid: 3003e6c33f93e4541a8bc6b8f9f53933, type: 3}
+    spawnPoint:
+    - {fileID: 170757960}
+    - {fileID: 1150426821}
+    - {fileID: 1150426821}
+    - {fileID: 621645997}
+    - {fileID: 621645997}
+    - {fileID: 1150426821}
+    - {fileID: 621645997}
+    - {fileID: 170757960}
+    - {fileID: 170757960}
+    - {fileID: 170757960}
+    - {fileID: 170757960}
+    - {fileID: 1925726169}
+    - {fileID: 1925726169}
+    - {fileID: 170757960}
+    - {fileID: 170757960}
+    - {fileID: 170757960}
+    - {fileID: 170757960}
+    - {fileID: 1925726169}
+    - {fileID: 170757960}
+    - {fileID: 1925726169}
+    - {fileID: 1925726169}
+    - {fileID: 1925726169}
+    - {fileID: 170757960}
+    - {fileID: 170757960}
+    - {fileID: 621645997}
+    - {fileID: 621645997}
+    - {fileID: 621645997}
+    - {fileID: 621645997}
+    - {fileID: 621645997}
+    - {fileID: 621645997}
+    - {fileID: 1150426821}
+    - {fileID: 621645997}
+    - {fileID: 1150426821}
+    - {fileID: 621645997}
+    - {fileID: 1150426821}
+    - {fileID: 621645997}
+    enemySpawnIntival:
+    - 0
+    - 8
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 30
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 2
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 10
+    - 0
+    - 10
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
 --- !u!4 &1172354876
 Transform:
   m_ObjectHideFlags: 0
