@@ -5185,7 +5185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10dcca0c0f6b7f745a17b103b4513a24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingResource: 2000
+  buildingResource: 500
 --- !u!114 &1172354874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6069,8 +6069,22 @@ MonoBehaviour:
     - {fileID: 8305191314412038720, guid: 3003e6c33f93e4541a8bc6b8f9f53933, type: 3}
     - {fileID: 8305191314412038720, guid: 3003e6c33f93e4541a8bc6b8f9f53933, type: 3}
     - {fileID: 8305191314412038720, guid: 3003e6c33f93e4541a8bc6b8f9f53933, type: 3}
-    - {fileID: 1750932264464685922, guid: a3b38d62cfe99e84789e0b8761646e7b, type: 3}
+    - {fileID: 8305191314412038720, guid: 3003e6c33f93e4541a8bc6b8f9f53933, type: 3}
+    - {fileID: 8305191314412038720, guid: 3003e6c33f93e4541a8bc6b8f9f53933, type: 3}
+    - {fileID: 8305191314412038720, guid: 3003e6c33f93e4541a8bc6b8f9f53933, type: 3}
+    - {fileID: 8305191314412038720, guid: 3003e6c33f93e4541a8bc6b8f9f53933, type: 3}
+    - {fileID: 8305191314412038720, guid: 3003e6c33f93e4541a8bc6b8f9f53933, type: 3}
+    - {fileID: 8305191314412038720, guid: 3003e6c33f93e4541a8bc6b8f9f53933, type: 3}
+    - {fileID: 8305191314412038720, guid: 3003e6c33f93e4541a8bc6b8f9f53933, type: 3}
     - {fileID: 5934191682279436730, guid: dc456fd1a4d6cc249b5994053befacf5, type: 3}
+    - {fileID: 1750932264464685922, guid: a3b38d62cfe99e84789e0b8761646e7b, type: 3}
+    - {fileID: 1750932264464685922, guid: a3b38d62cfe99e84789e0b8761646e7b, type: 3}
+    - {fileID: 1750932264464685922, guid: a3b38d62cfe99e84789e0b8761646e7b, type: 3}
+    - {fileID: 1750932264464685922, guid: a3b38d62cfe99e84789e0b8761646e7b, type: 3}
+    - {fileID: 1750932264464685922, guid: a3b38d62cfe99e84789e0b8761646e7b, type: 3}
+    - {fileID: 1750932264464685922, guid: a3b38d62cfe99e84789e0b8761646e7b, type: 3}
+    - {fileID: 1750932264464685922, guid: a3b38d62cfe99e84789e0b8761646e7b, type: 3}
+    - {fileID: 1750932264464685922, guid: a3b38d62cfe99e84789e0b8761646e7b, type: 3}
     - {fileID: 1750932264464685922, guid: a3b38d62cfe99e84789e0b8761646e7b, type: 3}
     spawnPoint:
     - {fileID: 621645997}
@@ -6079,7 +6093,35 @@ MonoBehaviour:
     - {fileID: 621645997}
     - {fileID: 1150426821}
     - {fileID: 621645997}
+    - {fileID: 1150426821}
+    - {fileID: 621645997}
+    - {fileID: 1150426821}
+    - {fileID: 1150426821}
+    - {fileID: 621645997}
+    - {fileID: 621645997}
+    - {fileID: 621645997}
+    - {fileID: 621645997}
+    - {fileID: 1150426821}
+    - {fileID: 621645997}
+    - {fileID: 1150426821}
+    - {fileID: 621645997}
+    - {fileID: 1150426821}
+    - {fileID: 621645997}
     enemySpawnIntival:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 1
+    - 0
+    - 0
+    - 0
+    - 0
+    - 10
+    - 10
+    - 0
+    - 0
+    - 0
     - 0
     - 0
     - 0
@@ -6095,11 +6137,20 @@ MonoBehaviour:
     - {fileID: 1750932264464685922, guid: a3b38d62cfe99e84789e0b8761646e7b, type: 3}
     - {fileID: 1750932264464685922, guid: a3b38d62cfe99e84789e0b8761646e7b, type: 3}
     - {fileID: 1750932264464685922, guid: a3b38d62cfe99e84789e0b8761646e7b, type: 3}
+    - {fileID: 1750932264464685922, guid: a3b38d62cfe99e84789e0b8761646e7b, type: 3}
+    - {fileID: 1750932264464685922, guid: a3b38d62cfe99e84789e0b8761646e7b, type: 3}
+    - {fileID: 1750932264464685922, guid: a3b38d62cfe99e84789e0b8761646e7b, type: 3}
     - {fileID: 8305191314412038720, guid: 3003e6c33f93e4541a8bc6b8f9f53933, type: 3}
     - {fileID: 8305191314412038720, guid: 3003e6c33f93e4541a8bc6b8f9f53933, type: 3}
     - {fileID: 8305191314412038720, guid: 3003e6c33f93e4541a8bc6b8f9f53933, type: 3}
     - {fileID: 8305191314412038720, guid: 3003e6c33f93e4541a8bc6b8f9f53933, type: 3}
+    - {fileID: 5934191682279436730, guid: dc456fd1a4d6cc249b5994053befacf5, type: 3}
+    - {fileID: 5934191682279436730, guid: dc456fd1a4d6cc249b5994053befacf5, type: 3}
     - {fileID: 8305191314412038720, guid: 3003e6c33f93e4541a8bc6b8f9f53933, type: 3}
+    - {fileID: 8305191314412038720, guid: 3003e6c33f93e4541a8bc6b8f9f53933, type: 3}
+    - {fileID: 1750932264464685922, guid: a3b38d62cfe99e84789e0b8761646e7b, type: 3}
+    - {fileID: 1750932264464685922, guid: a3b38d62cfe99e84789e0b8761646e7b, type: 3}
+    - {fileID: 1750932264464685922, guid: a3b38d62cfe99e84789e0b8761646e7b, type: 3}
     - {fileID: 8305191314412038720, guid: 3003e6c33f93e4541a8bc6b8f9f53933, type: 3}
     - {fileID: 8305191314412038720, guid: 3003e6c33f93e4541a8bc6b8f9f53933, type: 3}
     spawnPoint:
@@ -6118,6 +6169,15 @@ MonoBehaviour:
     - {fileID: 1925726169}
     - {fileID: 170757960}
     - {fileID: 170757960}
+    - {fileID: 170757960}
+    - {fileID: 170757960}
+    - {fileID: 1925726169}
+    - {fileID: 170757960}
+    - {fileID: 1925726169}
+    - {fileID: 1925726169}
+    - {fileID: 1925726169}
+    - {fileID: 170757960}
+    - {fileID: 170757960}
     enemySpawnIntival:
     - 0
     - 0
@@ -6127,12 +6187,21 @@ MonoBehaviour:
     - 0
     - 0
     - 0
-    - 10
+    - 0
+    - 0
+    - 5
+    - 0
+    - 0
+    - 0
+    - 15
+    - 0
+    - 5
+    - 1
     - 0
     - 0
     - 0
     - 0
-    - 0
+    - 1
     - 0
 --- !u!4 &1172354876
 Transform:
@@ -9904,6 +9973,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3535643578387123268, guid: 405e0d8ea07224a4c9c9995ac77c8d37, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1582349100}
+    - target: {fileID: 3535643578387123268, guid: 405e0d8ea07224a4c9c9995ac77c8d37, type: 3}
+      propertyPath: gameOverReset
+      value: 
+      objectReference: {fileID: 1172354878}
     - target: {fileID: 3535643578387123269, guid: 405e0d8ea07224a4c9c9995ac77c8d37, type: 3}
       propertyPath: m_Name
       value: Bed

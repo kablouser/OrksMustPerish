@@ -9778,7 +9778,7 @@ MonoBehaviour:
   trapGrid: {fileID: 0}
   animator: {fileID: 5338723215935395391}
   rb: {fileID: 5934191682279436728}
-  moveSpeed: 1
+  moveSpeed: 2
   slowSpeed: 1
   rotateSpeed: 50
   pushOtherEnemy: 0.3
@@ -9790,8 +9790,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1536
   attackRange: 3
-  attackDamage: 2
-  chaseRange: 5
+  attackDamage: 25
+  chaseRange: 3
   insideTrigger: []
 --- !u!135 &1022251858963603270
 SphereCollider:
@@ -9818,13 +9818,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1db4f05247b8b5040842a09bbecf5d76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 50
+  maxHealth: 500
   currentHealth: 0
   isPlayer: 0
   isBed: 0
   isBarricade: 0
-  buildingResourceWorth: 500
+  buildingResourceWorth: 200
   isGameOver: 0
+  player: {fileID: 0}
   gameOverReset: {fileID: 0}
 --- !u!1001 &5338723215462852089
 PrefabInstance:

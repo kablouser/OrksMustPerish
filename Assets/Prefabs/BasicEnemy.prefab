@@ -112,7 +112,7 @@ MonoBehaviour:
   trapGrid: {fileID: 0}
   animator: {fileID: 8305191313418200274}
   rb: {fileID: 8305191314412038748}
-  moveSpeed: 1
+  moveSpeed: 3
   slowSpeed: 1
   rotateSpeed: 180
   pushOtherEnemy: 0.3
@@ -124,8 +124,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1536
   attackRange: 1
-  attackDamage: 2
-  chaseRange: 5
+  attackDamage: 10
+  chaseRange: 2
   insideTrigger: []
 --- !u!135 &8305191314412038722
 SphereCollider:
@@ -152,13 +152,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1db4f05247b8b5040842a09bbecf5d76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 50
+  maxHealth: 100
   currentHealth: 0
   isPlayer: 0
   isBed: 0
   isBarricade: 0
-  buildingResourceWorth: 200
+  buildingResourceWorth: 20
   isGameOver: 0
+  player: {fileID: 0}
   gameOverReset: {fileID: 0}
 --- !u!95 &8305191313418200275
 Animator:

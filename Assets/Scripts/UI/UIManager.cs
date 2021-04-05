@@ -167,7 +167,7 @@ public class UIManager : MonoBehaviour
 
     private void gameOver()
     {
-        if(playerHealth.isGameOver)
+        if(playerHealth.isGameOver || bedHealth.isGameOver)
         {
             mainUI.SetActive(false);
             gameOverUI.SetActive(true);

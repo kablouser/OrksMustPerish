@@ -892,8 +892,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2310039892219652326}
   - component: {fileID: 3008604422401731746}
-  - component: {fileID: 4271981767855148949}
-  - component: {fileID: 5301163359477367529}
   m_Layer: 9
   m_Name: barricade
   m_TagString: Untagged
@@ -1002,42 +1000,9 @@ MonoBehaviour:
     renderer: {fileID: 7935982450246393774}
   - materialIndex: 1
     renderer: {fileID: 7487227516873824758}
-  trapCollider: {fileID: 5301163359477367529}
-  cost: 1
+  trapCollider: {fileID: 4725852311041486680}
+  cost: 200
   pathingPenalty: 50
---- !u!114 &4271981767855148949
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3117961703796224604}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1db4f05247b8b5040842a09bbecf5d76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 10
-  currentHealth: 10
-  isPlayer: 0
-  isBed: 0
-  isBarricade: 1
-  buildingResourceWorth: 0
-  isGameOver: 0
-  gameOverReset: {fileID: 0}
---- !u!65 &5301163359477367529
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3117961703796224604}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 4, y: 2.7798786, z: 4}
-  m_Center: {x: 0, y: 1.1399393, z: 0}
 --- !u!1 &3290818888251156111
 GameObject:
   m_ObjectHideFlags: 0
@@ -2696,6 +2661,7 @@ GameObject:
   - component: {fileID: 8429488388939973321}
   - component: {fileID: 535161453428191204}
   - component: {fileID: 4636582127798217540}
+  - component: {fileID: 4725852311041486680}
   m_Layer: 9
   m_Name: pCube7
   m_TagString: Untagged
@@ -2766,6 +2732,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &4725852311041486680
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8948752920953066063}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 4, y: 2.7798786, z: 4}
+  m_Center: {x: 0, y: 1.1399393, z: 0}
 --- !u!1 &9176882562749799660
 GameObject:
   m_ObjectHideFlags: 0
