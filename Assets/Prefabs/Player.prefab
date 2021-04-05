@@ -196,7 +196,7 @@ MonoBehaviour:
   rotationSpeed: 5
   repositionLayerMask:
     serializedVersion: 2
-    m_Bits: 631
+    m_Bits: 2679
 --- !u!1 &6751714369453441268
 GameObject:
   m_ObjectHideFlags: 0

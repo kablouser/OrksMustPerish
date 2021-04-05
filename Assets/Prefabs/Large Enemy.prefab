@@ -9708,7 +9708,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.6
+  m_Radius: 1.4
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5934191682279436730
 GameObject:
@@ -9800,8 +9800,8 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0.5, z: 0}
+  m_Radius: 1.2
+  m_Center: {x: 0, y: 1.2, z: 0}
 --- !u!114 &5340152820220640782
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9852,7 +9852,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5b127c4869d2a98419dc098f77f0b64f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.174
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5b127c4869d2a98419dc098f77f0b64f, type: 3}
       propertyPath: m_LocalRotation.w
