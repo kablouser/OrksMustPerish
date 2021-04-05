@@ -1468,7 +1468,6 @@ GameObject:
   - component: {fileID: 390480001668804458}
   - component: {fileID: 2066984414168034480}
   - component: {fileID: 3990859662617274031}
-  - component: {fileID: 8062151646423503522}
   m_Layer: 9
   m_Name: pCube1
   m_TagString: Untagged
@@ -1552,19 +1551,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4, y: 0.13279662, z: 4}
   m_Center: {x: 0, y: -0.18360169, z: 0}
---- !u!65 &8062151646423503522
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4519463554417672322}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 4, y: 2.402565, z: 4}
-  m_Center: {x: 0, y: 0.9512825, z: 0}
 --- !u!1 &4896553424470253637
 GameObject:
   m_ObjectHideFlags: 0
