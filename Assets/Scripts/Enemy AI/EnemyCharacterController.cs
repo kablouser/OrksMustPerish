@@ -258,13 +258,12 @@ public class EnemyCharacterController : MonoBehaviour
         SetRotation(currentTarget.transform.position - transform.position);
         animator.TriggerAttack(out float attackDuration, out float damageTimestamp);
 
-        if (currentTarget != null)
-        {
-            yield return new WaitForSeconds(damageTimestamp);
 
+        yield return new WaitForSeconds(damageTimestamp);
+
+        if (currentTarget != null)
             currentTarget.DamageMe(attackDamage);
 
-            yield return new WaitForSeconds(attackDuration - damageTimestamp);
-        }
+        yield return new WaitForSeconds(attackDuration - damageTimestamp);
     }
 }
