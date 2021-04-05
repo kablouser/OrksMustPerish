@@ -18,6 +18,7 @@ public class LegoTrap : MonoBehaviour
     {
         
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<EntityHealth>() && !other.GetComponent<LegoDamageComponent>())

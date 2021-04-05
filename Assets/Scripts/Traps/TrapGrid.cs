@@ -1,34 +1,63 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// Place this on room tile object (i.e. 5x5 hall), put TrapSlot object in the public gridPiece object, set grid size appropriatly to fill room with trap grid
-/// </summary>
 public class TrapGrid : MonoBehaviour
 {
-    public GameObject gridPiece;
-    public float gridSize;
-    // Start is called before the first frame update
-    void Start()
-    {
-        Vector3 gPosition = Vector3.zero;
-        float modSize = (gridSize / 2) * 4 - 2;
-        for (int x = 0; x < gridSize; x++)
-        {
-            for (int z = 0; z < gridSize; z++)
-            {
+    [Header("Go to pathing map manager. Set its dimensions equal to the size of the trap slots!")]
+    public GameObject trapSlotPrefab;
+    public PathingMapManager pathingMapManager;
 
-                GameObject trapSlot = Instantiate(gridPiece, new Vector3((4 * x) + (transform.position.x - modSize), transform.position.y, (4 * z) + (transform.position.z - modSize)), transform.rotation, transform);
-                trapSlot.GetComponent<BoxCollider>().enabled = false;
-                trapSlot.GetComponent<BoxCollider>().enabled = true;
-            }
+    [SerializeField]
+    [HideInInspector]
+    private TrapSlot[] grid;    
+
+    public TrapSlot GetSlot(Vector3 worldPosition, out Vector2Int gridPosition)
+    {
+        gridPosition = pathingMapManager.pathingMap.WorldToMap(worldPosition);
+        if(pathingMapManager.pathingMap.InRange(gridPosition))
+        {
+            int mapIndex = pathingMapManager.pathingMap.GetMapIndex(gridPosition);
+            TrapSlot trapSlot = grid[pathingMapManager.pathingMap.GetMapIndex(gridPosition)];
+            if (grid[mapIndex] != null)
+                return trapSlot;
+        }
+        return null;
+    }
+
+    public void UpdateGrid(TrapSlot trapSlot)
+    {
+        GenericTrap trap = trapSlot.GetPlacedTrap();
+        float newPenalty;
+        if (trap == null)
+            newPenalty = 0;
+        else
+            newPenalty = trap.pathingPenalty;
+
+        int mapIndex = pathingMapManager.pathingMap.GetMapIndex(pathingMapManager.pathingMap.WorldToMap(trapSlot.transform.position));
+        float currentPenalty = pathingMapManager.pathingMap.map[mapIndex].penalty;
+        if(currentPenalty != newPenalty)
+        {
+            pathingMapManager.pathingMap.map[mapIndex].penalty = newPenalty;
+            // this is slow
+            pathingMapManager.pathingMap.UpdateInstructions();
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    [ContextMenu("Recreate Grid")]
+    private void RecreateGrid()
     {
+        if (grid != null)
+            foreach (var x in grid)
+                if (x != null)
+                    DestroyImmediate(x.gameObject);
 
+        int dimensionX = pathingMapManager.pathingMap.dimensions.x;
+        grid = new TrapSlot[pathingMapManager.pathingMap.dimensions.x * pathingMapManager.pathingMap.dimensions.y];
+        for(int i = 0; i < grid.Length; ++i)
+        {
+            Vector2Int gridPosition = new Vector2Int(i % dimensionX, i / dimensionX);
+            grid[i] = Instantiate(trapSlotPrefab, transform).GetComponent<TrapSlot>();
+            grid[i].transform.position = pathingMapManager.pathingMap.MapToWorld(gridPosition);
+            grid[i].trapGrid = this;
+        }
     }
 }

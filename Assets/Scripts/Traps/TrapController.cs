@@ -47,7 +47,7 @@ public class TrapController : MonoBehaviour
         switch (mode)
         {
             case TrapControlMode.placing:
-                lookingAt = GetLookingAtTrapSlot();
+                lookingAt = GetLookingAtTrapSlot();                
                 if(lookingAt == null || lookingAt.IsTrapPlaced())
                 {
                     currentPlacingTrap.gameObject.SetActive(false);

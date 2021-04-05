@@ -81,9 +81,9 @@ public struct PathingMap
     public Vector3 MapToWorld(Vector2Int mapPosition)
     {
         return mapOrigin + new Vector3(
-            0.5f + mapPosition.x * mapNodeSize.x,
+            (0.5f + mapPosition.x) * mapNodeSize.x,
             mapOrigin.y,
-            0.5f + mapPosition.y * mapNodeSize.z);
+            (0.5f + mapPosition.y) * mapNodeSize.z);
     }
 
     public IEnumerable<Neighbor> GetNeighbors(Vector2Int position)

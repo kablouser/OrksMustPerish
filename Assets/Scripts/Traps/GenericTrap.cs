@@ -22,6 +22,8 @@ public class GenericTrap : MonoBehaviour
     public BoxCollider trapCollider;
 
     public int cost;
+    [Header("If barricade, pls set to very high ...")]
+    public float pathingPenalty;
 
     private TrapState state;
     private TrapColor color;
