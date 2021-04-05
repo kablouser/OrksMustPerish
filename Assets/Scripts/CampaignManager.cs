@@ -23,14 +23,17 @@ public class CampaignManager : MonoBehaviour
         }
     }
 
+    [ContextMenu("Next Level")]
     public void NextLevel()
     {
         ++currentLevel;
+        if (allLevels.Length <= currentLevel)
+            currentLevel = 0;
         if (currentLevel < allLevels.Length)
-            SceneManager.LoadScene(allLevels[currentLevel]);
-        
+            SceneManager.LoadScene(allLevels[currentLevel]);        
     }
 
+    [ContextMenu("Restart Level")]
     public void RestartLevel()
     {
         SceneManager.LoadScene(allLevels[currentLevel], LoadSceneMode.Single);
