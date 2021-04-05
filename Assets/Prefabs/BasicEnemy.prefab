@@ -112,7 +112,7 @@ MonoBehaviour:
   animator: {fileID: 8305191313418200274}
   rb: {fileID: 8305191314412038748}
   moveSpeed: 1
-  slowSpeed: 0
+  slowSpeed: 1
   rotateSpeed: 180
   pushOtherEnemy: 0.3
   otherEnemyPush: 1

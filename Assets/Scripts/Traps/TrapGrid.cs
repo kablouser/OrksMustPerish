@@ -65,6 +65,6 @@ public class TrapGrid : MonoBehaviour
     private void UpdatePathingMap()
     {
         for (int i = 0; i < grid.Length; ++i)
-            pathingMapManager.pathingMap.map[i].isWalkable = grid[i] == null;
+            pathingMapManager.pathingMap.map[i].isWalkable = grid[i] != null;
     }
 }

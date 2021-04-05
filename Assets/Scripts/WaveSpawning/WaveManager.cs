@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
@@ -26,7 +24,7 @@ public class WaveManager : MonoBehaviour
 
     private bool spawningEnemies = false;
 
-    private bool levelOver = false;
+    public bool LevelOver { get; private set; }
 
     private float timeToSpawn;
 
@@ -35,6 +33,7 @@ public class WaveManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        LevelOver = false;
         maxWaveNumber = wavesInLevel.Length;
         pathingMapManager = GetComponent<PathingMapManager>();
         buildingResourceManager = GetComponent<BuildingResourceManager>();
@@ -44,13 +43,12 @@ public class WaveManager : MonoBehaviour
     void Update()
     {
         //Checks if all enemies are dead and the level is not over.
-        if(IsWaveDone() && !levelOver)
+        if(IsWaveDone() && !LevelOver)
         {
             //If the final wave has already passed then the level is over.
             if(waveNumber == maxWaveNumber)
             {
-                Debug.Log("Level Over!");
-                levelOver = true;
+                LevelOver = true;
             }
             else if(Input.GetKeyDown(KeyCode.T))
             {

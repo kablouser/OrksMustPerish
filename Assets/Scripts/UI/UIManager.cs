@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
+using System.Collections;
 
 public class UIManager : MonoBehaviour
 {
@@ -37,8 +36,13 @@ public class UIManager : MonoBehaviour
     public Color slotDefaultColor;
     public Color slotSelectedColor;
     public Image[] hotbarSlots;
-
+        
     public TextMeshProUGUI trapControllerMessage;
+
+    public float levelOverWaitTime = 4.0f;
+    public TextMeshProUGUI levelOverMessage;
+
+    private const string levelOverString = "Level victory! Continuing in {0}s...";
 
     // Start is called before the first frame update
     void Start()
@@ -80,6 +84,13 @@ public class UIManager : MonoBehaviour
         {
             trapControllerMessage.enabled = true;
             trapControllerMessage.SetText(getMessage);
+        }
+
+        if(waveManager.LevelOver && levelOverMessage.enabled == false)
+        {
+            levelOverMessage.enabled = true;
+            StopAllCoroutines();
+            StartCoroutine(NextLevelRoutine());
         }
     }
 
@@ -126,5 +137,26 @@ public class UIManager : MonoBehaviour
     private void SetBuildingResourceNumber(int amountOfBuildingResource)
     {
         buildingResourceNumber.SetText("${0}", amountOfBuildingResource);
+    }
+
+    private IEnumerator NextLevelRoutine()
+    {
+        WaitForFixedUpdate wait = new WaitForFixedUpdate();
+        float waitUntil = Time.time + levelOverWaitTime;
+        int previousSecondsLeft = -1;
+        do
+        {
+            int secondsLeft = Mathf.CeilToInt(waitUntil - Time.time);
+            if(previousSecondsLeft != secondsLeft)
+            {
+                previousSecondsLeft = secondsLeft;
+                levelOverMessage.SetText(string.Format(levelOverString, secondsLeft));
+            }
+            yield return wait;
+        }
+        while (Time.time < waitUntil);
+
+        // campaign manager
+        CampaignManager.GetCampaignManager.NextLevel();
     }
 }

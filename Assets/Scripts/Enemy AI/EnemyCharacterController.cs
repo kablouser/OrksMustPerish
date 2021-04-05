@@ -38,6 +38,7 @@ public class EnemyCharacterController : MonoBehaviour
         const int sphereCastResultsLength = 10;
         sphereCastResults = new Collider[sphereCastResultsLength];
         currentTarget = null;
+        slowSpeed = 1;
     }
 
     private void FixedUpdate()
