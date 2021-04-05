@@ -5,6 +5,7 @@ using System.Collections;
 public class EnemyCharacterController : MonoBehaviour
 {
     public PathingMapManager mapManager;
+    public TrapGrid trapGrid;
     public GenericAnimator animator;
     public Rigidbody rb;
     public float moveSpeed;
@@ -18,6 +19,7 @@ public class EnemyCharacterController : MonoBehaviour
     public float otherEnemyPush;
 
     public LayerMask playerDetectionMask;
+    public LayerMask entityHealthDetectionMask;
     public float attackRange;
     public int attackDamage;
     [Tooltip("Warning. Goes in a straight line towards the player. Too much range means enemy can get stuck!")]
@@ -48,10 +50,37 @@ public class EnemyCharacterController : MonoBehaviour
             // follow current path
             Vector2Int mapPosition = mapManager.pathingMap.WorldToMap(transform.position);
             if (mapManager.pathingMap.InRange(mapPosition))
-            {
+            {                
                 Vector2Int nextMapPosition = mapManager.pathingMap.map[mapManager.pathingMap.GetMapIndex(mapPosition)].cameFrom;
                 Vector3 nextWorldPosition = mapManager.pathingMap.MapToWorld(nextMapPosition);
                 SetMove(nextWorldPosition - transform.position);
+
+                // check if its a barricade
+                if (CheckBarricade(nextWorldPosition) == false)
+                {
+                    bool isDiagonal = 1 < (nextMapPosition - mapPosition).sqrMagnitude;
+                    if (isDiagonal)
+                    {
+                        Vector3 position1 = mapManager.pathingMap.MapToWorld(new Vector2Int(nextMapPosition.x, mapPosition.y));
+                        Vector3 position2 = mapManager.pathingMap.MapToWorld(new Vector2Int(mapPosition.x, nextMapPosition.y));
+
+                        Vector3 closest, furthest;
+                        if ((position1 - transform.position).sqrMagnitude < (position2 - transform.position).sqrMagnitude)
+                        {
+                            closest = position1;
+                            furthest = position2;
+                        }
+                        else
+                        {
+                            closest = position2;
+                            furthest = position1;
+                        }
+
+                        if( CheckBarricade(closest) ||
+                            CheckBarricade(furthest))
+                        { }
+                    }
+                }
             }
             else
                 SetMove(Vector3.zero);
@@ -160,18 +189,18 @@ public class EnemyCharacterController : MonoBehaviour
 
     bool IsTargetInRange(EntityHealth target)
     {
-        int results = Physics.OverlapSphereNonAlloc(transform.position, attackRange, sphereCastResults, playerDetectionMask);
+        int results = Physics.OverlapSphereNonAlloc(transform.position, attackRange, sphereCastResults, entityHealthDetectionMask);
         for (int i = 0; i < results; ++i)
         {
+            EntityHealth compare = null;
             Rigidbody rigidbody = sphereCastResults[i].attachedRigidbody;
             if (rigidbody != null)
-            {
-                EntityHealth compare = rigidbody.GetComponent<EntityHealth>();
-                if (compare == target)
-                {
-                    return true;
-                }
-            }
+                compare = rigidbody.GetComponent<EntityHealth>();
+            else if (sphereCastResults[i].GetComponent<EntityHealth>())
+                compare = sphereCastResults[i].GetComponent<EntityHealth>();
+
+            if (compare == target)
+                return true;
         }
         return false;
     }
@@ -181,9 +210,28 @@ public class EnemyCharacterController : MonoBehaviour
         return Vector3.Distance(target.transform.position, transform.position) < chaseRange;
     }
 
+    bool CheckBarricade(Vector3 atPosition)
+    {
+        TrapSlot trapSlot = trapGrid.GetSlot(atPosition, out _);
+        if (trapSlot != null)
+        {
+            GenericTrap trap = trapSlot.GetPlacedTrap();
+            if (trap != null)
+            {
+                EntityHealth health = trap.GetComponent<EntityHealth>();
+                if (health != null)
+                {
+                    Chase(health);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     IEnumerator ChaseRoutine()
     {
-        while(true)
+        while(currentTarget != null)
         {
             if (IsTargetInRange(currentTarget))
             {

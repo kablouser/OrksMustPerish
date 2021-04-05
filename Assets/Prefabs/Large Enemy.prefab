@@ -9775,6 +9775,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapManager: {fileID: 0}
+  trapGrid: {fileID: 0}
   animator: {fileID: 5338723215935395391}
   rb: {fileID: 5934191682279436728}
   moveSpeed: 1
@@ -9785,6 +9786,9 @@ MonoBehaviour:
   playerDetectionMask:
     serializedVersion: 2
     m_Bits: 1024
+  entityHealthDetectionMask:
+    serializedVersion: 2
+    m_Bits: 1536
   attackRange: 3
   attackDamage: 2
   chaseRange: 5
@@ -9818,7 +9822,10 @@ MonoBehaviour:
   currentHealth: 0
   isPlayer: 0
   isBed: 0
+  isBarricade: 0
   buildingResourceWorth: 500
+  isGameOver: 0
+  gameOverReset: {fileID: 0}
 --- !u!1001 &5338723215462852089
 PrefabInstance:
   m_ObjectHideFlags: 0

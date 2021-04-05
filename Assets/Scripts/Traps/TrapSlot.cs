@@ -50,11 +50,12 @@ public class TrapSlot : MonoBehaviour
 
     public void EndDeleteTrap(bool confirm,
         BuildingResourceManager buildingResourceManager,
-        float refundPrice)
+        float refundAmount)
     {
         if (IsTrapPlaced())
-        {
-            placedTrap.EndDelete(confirm, buildingResourceManager, refundPrice);
+        {          
+            placedTrap.EndDelete(confirm, buildingResourceManager, refundAmount);
+
             if (confirm)
             {
                 placedTrap = null;

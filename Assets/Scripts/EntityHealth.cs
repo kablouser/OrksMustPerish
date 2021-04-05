@@ -10,6 +10,7 @@ public class EntityHealth : MonoBehaviour
 
     public bool isPlayer;
     public bool isBed;
+    public bool isBarricade;
 
     public int buildingResourceWorth;
 
@@ -76,6 +77,10 @@ public class EntityHealth : MonoBehaviour
                 GetComponent<ThirdPersonCharacterController>().enabled = false;
                 GetComponent<WandWeapon>().enabled = false;
                 gameOverReset.enabled = true;
+            }
+            else if(isBarricade)
+            {
+                GetComponent<GenericTrap>().transform.parent.GetComponent<TrapSlot>().EndDeleteTrap(true, null, 0);
             }
             else
             {
